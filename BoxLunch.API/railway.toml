@@ -1,0 +1,5 @@
+# Configuración Railway para el servicio de la API (.NET)
+# Este archivo aplica al servicio que apunta a BoxLunch.API/ en el repositorio.
+
+[build]
+dockerfilePath = "Dockerfile"

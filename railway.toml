@@ -1,0 +1,8 @@
+# Configuración Railway para el servicio del FRONTEND (React/Vite + Nginx)
+# Este archivo aplica al servicio que apunta a la raíz del repositorio.
+
+[build]
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "nginx -g 'daemon off;'"

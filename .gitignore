@@ -1,0 +1,64 @@
+# ============================================================
+# SECRETOS - NUNCA subir a repositorio público
+# ============================================================
+BoxLunch.API/appsettings.json
+BoxLunch.API/appsettings.Development.json
+BoxLunch.API/appsettings.Production.json
+
+# ============================================================
+# BASE DE DATOS LOCAL
+# ============================================================
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+vibe_dev.db
+/data/
+
+# ============================================================
+# BUILD OUTPUTS (.NET)
+# ============================================================
+BoxLunch.API/bin/
+BoxLunch.API/obj/
+BoxLunch.API/publish/
+BoxLunch.API/App_Data/
+BoxLunch.API/SECRETOS.md
+
+# ============================================================
+# NODE / FRONTEND
+# ============================================================
+node_modules/
+dist/
+.vite/
+
+# ============================================================
+# SCRIPTS Y ARCHIVOS TEMPORALES
+# ============================================================
+patch_frontend.py
+seed-empleados.js
+*.sql
+power.config.json
+app-gen-sdk/
+
+# ============================================================
+# STORYBOOK / VITEST (no se usan en producción)
+# ============================================================
+src/stories/
+vitest.shims.d.ts
+.storybook/
+
+# ============================================================
+# SISTEMA OPERATIVO
+# ============================================================
+.DS_Store
+Thumbs.db
+*.suo
+*.user
+
+# ============================================================
+# IDEs y herramientas de AI
+# ============================================================
+.vscode/settings.json
+.idea/
+*.swp
+.refact/

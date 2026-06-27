@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BoxLunch · Mantenimiento</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg:        #0d0f14;
+        --surface:   rgba(255,255,255,0.045);
+        --border:    rgba(255,255,255,0.09);
+        --primary:   #6366f1;
+        --accent:    #a78bfa;
+        --text:      #f1f5f9;
+        --muted:     #94a3b8;
+        --radius:    28px;
+      }
+
+      html, body {
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Grain texture overlay ── */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── Ambient orbs ── */
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+        animation: pulse 8s ease-in-out infinite;
+      }
+      .orb-1 { width: 500px; height: 500px; background: rgba(99,102,241,0.12); top: -100px; left: -100px; animation-delay: 0s; }
+      .orb-2 { width: 400px; height: 400px; background: rgba(167,139,250,0.10); bottom: -80px; right: -80px; animation-delay: 3s; }
+      .orb-3 { width: 300px; height: 300px; background: rgba(99,102,241,0.07); bottom: 30%; left: 50%; animation-delay: 1.5s; }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50%       { opacity: 1;   transform: scale(1.1); }
+      }
+
+      /* ── Grid lines ── */
+      .grid {
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+      }
+
+      /* ── Layout ── */
+      .page {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      /* ── Card ── */
+      .card {
+        position: relative;
+        width: 100%;
+        max-width: 480px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 44px 40px 40px;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow:
+          0 40px 100px rgba(0,0,0,0.3),
+          0 0 0 1px rgba(255,255,255,0.04),
+          inset 0 1px 0 rgba(255,255,255,0.1);
+        animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Shine line top */
+      .card::before {
+        content: '';
+        position: absolute;
+        inset-x: 0; top: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+
+      /* ── Logo ── */
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 28px;
+        animation: fadeUp 0.45s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .logo-box {
+        width: 72px; height: 72px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(167,139,250,0.1));
+        border: 1px solid rgba(99,102,241,0.2);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 32px rgba(99,102,241,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+      .logo-box img { width: 48px; height: 48px; object-fit: contain; }
+
+      /* ── Wrench icon ── */
+      .icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        animation: fadeUp 0.45s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .icon-badge {
+        width: 52px; height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(167,139,250,0.08));
+        border: 1px solid rgba(99,102,241,0.18);
+        display: flex; align-items: center; justify-content: center;
+        animation: spin 3s ease-in-out infinite;
+      }
+      @keyframes spin {
+        0%, 100% { transform: rotate(-8deg); }
+        50%       { transform: rotate(8deg); }
+      }
+      .icon-badge svg { width: 26px; height: 26px; color: var(--accent); }
+
+      /* ── Typography ── */
+      .title {
+        text-align: center;
+        margin-bottom: 10px;
+        animation: fadeUp 0.45s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .title h1 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #f1f5f9 30%, #94a3b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 2px;
+      }
+      .title .brand {
+        font-size: 0.8rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      /* ── Divider ── */
+      .divider {
+        display: flex; align-items: center; gap: 12px;
+        margin: 20px 0;
+        animation: fadeUp 0.45s 0.25s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .divider-line { flex: 1; height: 1px; background: var(--border); }
+      .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+
+      /* ── Message ── */
+      .message {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.875rem;
+        line-height: 1.7;
+        margin-bottom: 28px;
+        animation: fadeUp 0.45s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .message strong { color: var(--text); font-weight: 600; }
+
+      /* ── Progress bar ── */
+      .progress-wrap {
+        margin-bottom: 28px;
+        animation: fadeUp 0.45s 0.35s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .progress-bar {
+        height: 4px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        width: 65%;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        border-radius: 99px;
+        animation: progressMove 2.5s ease-in-out infinite alternate;
+        box-shadow: 0 0 12px rgba(99,102,241,0.5);
+      }
+      @keyframes progressMove {
+        from { width: 30%; margin-left: 0; }
+        to   { width: 40%; margin-left: 60%; }
+      }
+
+      /* ── Status pills ── */
+      .status-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 28px;
+        animation: fadeUp 0.45s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .status-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        background: rgba(255,255,255,0.025);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+      .status-row .label { color: var(--muted); }
+      .status-ok    { color: #4ade80; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+      .status-work  { color: #fbbf24; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+
+      .dot-blink { width: 6px; height: 6px; border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+      .dot-green { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+      .dot-yellow { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; animation-delay: 0.3s; }
+
+      @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+      /* ── Footer ── */
+      .footer {
+        text-align: center;
+        font-size: 0.72rem;
+        color: rgba(148,163,184,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        animation: fadeUp 0.45s 0.48s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .footer svg { width: 11px; height: 11px; }
+
+      /* ── Reflection ── */
+      .reflection {
+        width: 60%; height: 20px;
+        margin: 12px auto 0;
+        background: rgba(99,102,241,0.06);
+        border-radius: 50%;
+        filter: blur(12px);
+      }
+
+      @media (max-width: 520px) {
+        .card { padding: 32px 24px 28px; border-radius: 20px; }
+        .title h1 { font-size: 1.35rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Ambiente -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid"></div>
+
+    <div class="page">
+      <div class="card">
+
+        <!-- Logo Demo App -->
+        <div class="logo-wrap">
+          <div class="logo-box">
+            <img src="https://placehold.co/200x200/png?text=Logo" alt="Demo App" />
+          </div>
+        </div>
+
+        <!-- Ícono de mantenimiento -->
+        <div class="icon-wrap">
+          <div class="icon-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Título -->
+        <div class="title">
+          <h1>En Mantenimiento</h1>
+          <p class="brand">BoxLunch &nbsp;·&nbsp; Demo App</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-dot"></div>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Mensaje -->
+        <p class="message">
+          Estamos realizando una <strong>actualización del sistema</strong>.<br />
+          El servicio estará disponible nuevamente en breve.<br /><br />
+          Gracias por tu paciencia.
+        </p>
+
+        <!-- Barra de progreso animada -->
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Estado de servicios -->
+        <div class="status-grid">
+          <div class="status-row">
+            <span class="label">Base de datos</span>
+            <span class="status-ok">
+              <span class="dot-blink dot-green"></span> Operando
+            </span>
+          </div>
+          <div class="status-row">
+            <span class="label">Servidor de aplicación</span>
+            <span class="status-work">
+              <span class="dot-blink dot-yellow"></span> Actualizando
+            </span>
+          </div>
+          <div class="status-row">
+            <span class="label">Autenticación Microsoft</span>
+            <span class="status-ok">
+              <span class="dot-blink dot-green"></span> Operando
+            </span>
+          </div>
+        </div>
+
+        <!-- Pie -->
+        <div class="footer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Acceso restringido durante el mantenimiento
+        </div>
+
+      </div>
+
+      <!-- Reflejo decorativo -->
+      <div class="reflection"></div>
+    </div>
+  </body>
+</html>

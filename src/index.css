@@ -1,0 +1,5498 @@
+@import 'tailwindcss';
+/* @import 'tw-animate-css'; */
+
+@custom-variant dark (&:is(.dark *));
+
+/* Custom Font */
+@font-face {
+  font-family: 'Sora';
+  src: local('Sora');
+  font-display: swap;
+}
+
+@theme inline {
+  --font-display: 'Georgia', 'Sora', serif;
+  --font-body: 'Segoe UI', system-ui, sans-serif;
+  
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-skeleton: var(--skeleton);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+}
+
+:root {
+  --radius: 0.75rem;
+  /* Warm cream background */
+  --background: oklch(0.98 0.008 75);
+  --foreground: oklch(0.25 0.02 30);
+  /* Cream cards */
+  --card: oklch(1 0.005 75);
+  --card-foreground: oklch(0.25 0.02 30);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.02 30);
+  /* Warm orange primary */
+  --primary: oklch(0.62 0.19 45);
+  --primary-foreground: oklch(1 0 0);
+  /* Light peach secondary */
+  --secondary: oklch(0.95 0.03 60);
+  --secondary-foreground: oklch(0.35 0.05 40);
+  /* Muted warm tones */
+  --muted: oklch(0.94 0.015 70);
+  --muted-foreground: oklch(0.5 0.02 40);
+  /* Accent - terracotta */
+  --accent: oklch(0.68 0.14 35);
+  --accent-foreground: oklch(1 0 0);
+  --skeleton: oklch(0.92 0.02 65);
+  /* Warm red for destructive */
+  --destructive: oklch(0.55 0.22 25);
+  /* Borders */
+  --border: oklch(0.88 0.02 60);
+  --input: oklch(0.92 0.015 65);
+  --ring: oklch(0.62 0.19 45);
+  /* Charts */
+  --chart-1: oklch(0.62 0.19 45);
+  --chart-2: oklch(0.68 0.14 35);
+
+/* New Request Button - Compact Mobile Version */
+@media (max-width: 640px) {
+  .nueva-solicitud-btn {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
+  }
+  
+  .nueva-solicitud-btn.mobile-compact {
+    padding: 6px 10px !important;
+    min-width: unset !important;
+    font-size: 12px !important;
+  }
+  
+  .nueva-solicitud-btn.mobile-compact .btn-text {
+    display: inline !important;
+  }
+  
+  .nueva-solicitud-btn.mobile-compact svg {
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0 !important;
+  }
+}
+  --chart-3: oklch(0.72 0.12 150);
+  --chart-4: oklch(0.8 0.1 85);
+  --chart-5: oklch(0.55 0.15 20);
+  /* Sidebar */
+  --sidebar: oklch(0.96 0.012 68);
+  --sidebar-foreground: oklch(0.25 0.02 30);
+  --sidebar-primary: oklch(0.62 0.19 45);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.92 0.03 55);
+  --sidebar-accent-foreground: oklch(0.3 0.03 35);
+  --sidebar-border: oklch(0.88 0.02 60);
+  --sidebar-ring: oklch(0.62 0.19 45);
+  /* Custom colors */
+  --success: oklch(0.65 0.18 145);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.78 0.16 85);
+  --warning-foreground: oklch(0.25 0.05 50);
+}
+
+.dark {
+  --background: oklch(0.18 0.02 40);
+  --foreground: oklch(0.95 0.01 60);
+  --card: oklch(0.22 0.025 38);
+  --card-foreground: oklch(0.95 0.01 60);
+  --popover: oklch(0.22 0.025 38);
+  --popover-foreground: oklch(0.95 0.01 60);
+  --primary: oklch(0.72 0.17 50);
+  --primary-foreground: oklch(0.15 0.02 35);
+  --secondary: oklch(0.28 0.03 42);
+  --secondary-foreground: oklch(0.92 0.01 55);
+  --muted: oklch(0.28 0.025 40);
+  --muted-foreground: oklch(0.7 0.02 50);
+  --accent: oklch(0.75 0.13 40);
+  --accent-foreground: oklch(0.15 0.02 35);
+  --skeleton: oklch(0.28 0.02 40);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(0.35 0.02 45);
+  --input: oklch(0.3 0.02 42);
+  --ring: oklch(0.72 0.17 50);
+  --chart-1: oklch(0.72 0.17 50);
+  --chart-2: oklch(0.75 0.13 40);
+  --chart-3: oklch(0.72 0.14 145);
+  --chart-4: oklch(0.8 0.12 85);
+  --chart-5: oklch(0.65 0.16 22);
+  --sidebar: oklch(0.2 0.022 39);
+  --sidebar-foreground: oklch(0.95 0.01 60);
+  --sidebar-primary: oklch(0.72 0.17 50);
+  --sidebar-primary-foreground: oklch(0.15 0.02 35);
+  --sidebar-accent: oklch(0.28 0.03 42);
+  --sidebar-accent-foreground: oklch(0.92 0.01 55);
+  --sidebar-border: oklch(0.35 0.02 45);
+  --sidebar-ring: oklch(0.72 0.17 50);
+  --success: oklch(0.7 0.17 145);
+  --success-foreground: oklch(0.12 0.02 150);
+  --warning: oklch(0.82 0.14 85);
+  --warning-foreground: oklch(0.2 0.04 50);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+/* ===========================================
+   RESPONSIVE TYPOGRAPHICAL SCALE
+   Consistent typographic hierarchy system
+   Desktop → Tablet → Mobile
+   =========================================== */
+
+/* Level 1: Main Title (ex: "Order Panel") */
+.typo-title-main {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 1024px) {
+  .typo-title-main {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-title-main {
+    font-size: 24px;
+  }
+}
+
+/* Level 2: Subtitle/Description */
+.typo-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .typo-subtitle {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* Cards: Title (ex: "Total Orders") */
+.typo-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-card-title {
+    font-size: 13px;
+  }
+}
+
+/* Cards: Large Number/Metric */
+.typo-card-number {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 1024px) {
+  .typo-card-number {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-card-number {
+    font-size: 24px;
+  }
+}
+
+/* Texto base / contenido general */
+.typo-body {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .typo-body {
+    font-size: 13px;
+  }
+}
+
+/* Small / auxiliary text (labels, captions) */
+.typo-small {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-small {
+    font-size: 12px;
+  }
+}
+
+/* Table: Headers */
+.typo-table-header {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .typo-table-header {
+    font-size: 12px;
+  }
+}
+
+/* Table: Cell content */
+.typo-table-cell {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-table-cell {
+    font-size: 13px;
+  }
+}
+
+/* Badges / Status Chips */
+.typo-badge {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Main button */
+.typo-btn-primary {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+@media (max-width: 1024px) {
+  .typo-btn-primary {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-btn-primary {
+    font-size: 14px;
+  }
+}
+
+/* Botones secundarios */
+.typo-btn-secondary {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .typo-btn-secondary {
+    font-size: 13px;
+  }
+}
+
+/* Filtros / Tabs */
+.typo-filter {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .typo-filter {
+    font-size: 13px;
+  }
+}
+
+/* Input / Search */
+.typo-input {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-input {
+    font-size: 13px;
+  }
+}
+
+/* Footer texto */
+.typo-footer {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-footer {
+    font-size: 12px;
+  }
+}
+
+/* Fecha navegador */
+.typo-date {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .typo-date {
+    font-size: 13px;
+  }
+}
+
+/* Dashboard Metrics - main number */
+.typo-metric-number {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+@media (max-width: 1024px) {
+  .typo-metric-number {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-metric-number {
+    font-size: 22px;
+  }
+}
+
+/* Dashboard Metrics - label */
+.typo-metric-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .typo-metric-label {
+    font-size: 13px;
+  }
+}
+
+/* ===========================================
+   MODAL RESPONSIVE TYPOGRAPHY
+   Typographic hierarchy system for modals
+   Desktop → Tablet → Mobile
+   =========================================== */
+
+/* Modal: Main title ("Request Box Lunch") */
+.typo-modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1024px) {
+  .typo-modal-title {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-modal-title {
+    font-size: 17px;
+  }
+}
+
+/* Modal: Field labels ("Employee *", "Delivery date *") */
+.typo-modal-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-modal-label {
+    font-size: 12px;
+  }
+}
+
+/* Required field asterisk - uses theme primary color */
+.required-asterisk {
+  color: var(--primary);
+  font-weight: 600;
+  margin-left: 1px;
+  display: inline;
+}
+
+/* Modal: Input text / trigger text */
+.typo-modal-input {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-modal-input {
+    font-size: 12px;
+  }
+}
+
+/* Modal: Texto secundario (emails, descripciones) */
+.typo-modal-secondary {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .typo-modal-secondary {
+    font-size: 11px;
+  }
+}
+
+/* Modal: Botones */
+.typo-modal-btn {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .typo-modal-btn {
+    font-size: 12px;
+  }
+}
+
+
+/* ===========================================
+   CANCEL MODAL RESPONSIVE TYPOGRAPHY
+   Visual hierarchy for the cancellation modal
+   Desktop -> Tablet -> Mobile
+   =========================================== */
+
+/* Cancel Modal: Main title (Cancel Order) */
+.typo-cancel-modal-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-title {
+    font-size: 18px;
+  }
+}
+
+/* Cancel Modal: Subtitulo (Estas seguro...?) */
+.typo-cancel-modal-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-subtitle {
+    font-size: 13px;
+  }
+}
+
+/* Cancel Modal: User name */
+.typo-cancel-modal-name {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--foreground);
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-name {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-name {
+    font-size: 15px;
+  }
+}
+
+/* Cancel Modal: User Email */
+.typo-cancel-modal-email {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-email {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-email {
+    font-size: 12px;
+  }
+}
+
+/* Cancel Modal: Label Reason for cancellation */
+.typo-cancel-modal-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-label {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-label {
+    font-size: 12px;
+  }
+}
+
+/* Cancel Modal: Label (opcional) */
+.typo-cancel-modal-label-optional {
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-label-optional {
+    font-size: 11px;
+  }
+}
+
+/* Cancel Modal: Dropdown text */
+.typo-cancel-modal-dropdown {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-dropdown {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-dropdown {
+    font-size: 13px;
+  }
+}
+
+/* ===========================================
+   UNIFIED MODAL BUTTONS
+   Consistent size for all buttons
+   "Cancel" and "Close" in modals
+   =========================================== */
+
+/* Secondary Modal Button (Cancel/Close) - UNIFIED */
+/* Use with: elegant-outline-btn modal-btn-secondary */
+/* Restore the elegant style with warm border and clean background */
+.modal-btn-secondary,
+.elegant-outline-btn.modal-btn-secondary,
+button.elegant-outline-btn.modal-btn-secondary {
+  /* Unified Typography - 14px/600 centered */
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  padding: 0 20px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  min-width: 110px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  gap: 6px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  
+  /* Elegant secondary style - warm/soft edge */
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 2%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 4%, transparent) 100%
+  ) !important;
+  border: 1px solid color-mix(in oklch, var(--primary) 32%, var(--border)) !important;
+  color: var(--foreground) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  
+  /* Transiciones suaves */
+  transition:
+    background 0.2s ease-out,
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    transform 0.15s ease-out,
+    color 0.15s ease-out !important;
+}
+
+/* Hover - Soft warm background, icon and text with primary color */
+.modal-btn-secondary:hover,
+.elegant-outline-btn.modal-btn-secondary:hover,
+button.elegant-outline-btn.modal-btn-secondary:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 6%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 9%, transparent) 100%
+  ) !important;
+  border-color: color-mix(in oklch, var(--primary) 55%, var(--border)) !important;
+  color: var(--primary) !important;
+  box-shadow: 0 1px 3px color-mix(in oklch, var(--primary) 10%, transparent) !important;
+  transform: translateY(0) !important;
+}
+
+/* Active - Pressed, icon and text with primary color */
+.modal-btn-secondary:active,
+.elegant-outline-btn.modal-btn-secondary:active,
+button.elegant-outline-btn.modal-btn-secondary:active {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 12%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 16%, transparent) 100%
+  ) !important;
+  color: var(--primary) !important;
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow:
+    0 1px 3px color-mix(in oklch, var(--primary) 12%, transparent),
+    inset 0 1px 2px color-mix(in oklch, var(--primary) 5%, transparent) !important;
+}
+
+@media (max-width: 1024px) {
+  .modal-btn-secondary,
+  .elegant-outline-btn.modal-btn-secondary,
+  button.elegant-outline-btn.modal-btn-secondary {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    padding: 0 18px !important;
+    min-height: 42px !important;
+    height: 42px !important;
+    min-width: 100px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-btn-secondary,
+  .elegant-outline-btn.modal-btn-secondary,
+  button.elegant-outline-btn.modal-btn-secondary {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    padding: 0 16px !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    min-width: 95px !important;
+  }
+}
+
+/* Primary Modal Button (Main Action) */
+/* Use with: (variant destructive/default) modal-btn-primary */
+.modal-btn-primary {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  padding: 0 20px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  min-width: 150px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+/* Left button icon - balanced with 14px text */
+.modal-btn-primary .modal-btn-icon,
+.modal-btn-primary svg.modal-btn-icon {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Fallback for icons without specific class */
+.modal-btn-primary svg:not(.modal-btn-icon) {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  .modal-btn-primary {
+    font-size: 14px !important;
+    line-height: 1 !important;
+    padding: 0 18px !important;
+    min-height: 42px !important;
+    height: 42px !important;
+    min-width: 140px !important;
+  }
+  .modal-btn-primary .modal-btn-icon,
+  .modal-btn-primary svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-btn-primary {
+    font-size: 14px !important;
+    line-height: 1 !important;
+    padding: 0 14px !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    min-width: 130px !important;
+  }
+  .modal-btn-primary .modal-btn-icon,
+  .modal-btn-primary svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* Cancel confirm button - shadow/glow with theme color */
+.modal-btn-cancel-confirm {
+  box-shadow:
+    0 4px 14px -2px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 2px 6px -1px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+  transition:
+    background 0.2s ease-out,
+    box-shadow 0.25s ease-out,
+    transform 0.15s ease-out !important;
+}
+
+/* Ensure white text in dark mode for all theme colors */
+.dark .modal-btn-cancel-confirm,
+.dark .modal-btn-cancel-confirm svg {
+  color: #ffffff !important;
+}
+
+.modal-btn-cancel-confirm:hover {
+  box-shadow:
+    0 6px 20px -2px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 3px 8px -1px color-mix(in oklch, var(--primary) 20%, transparent) !important;
+}
+
+.modal-btn-cancel-confirm:active {
+  box-shadow:
+    0 2px 8px -1px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 1px 4px color-mix(in oklch, var(--primary) 18%, transparent) !important;
+}
+
+/* LEGACY: maintain compatibility with existing classes */
+.typo-cancel-modal-btn-secondary {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 8px 16px;
+  min-height: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-btn-secondary {
+    font-size: 14px;
+    padding: 7px 14px;
+    min-height: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-btn-secondary {
+    font-size: 13px;
+    padding: 7px 12px;
+    min-height: 34px;
+    height: 34px;
+  }
+}
+
+.typo-cancel-modal-btn-primary {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 8px 16px;
+  min-height: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .typo-cancel-modal-btn-primary {
+    font-size: 13px;
+    padding: 7px 14px;
+    min-height: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-cancel-modal-btn-primary {
+    font-size: 12px;
+    padding: 7px 12px;
+    min-height: 34px;
+    height: 34px;
+  }
+}
+
+
+/* Modal User: Name (generic for all modals) */
+.typo-modal-user-name {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--foreground);
+}
+
+@media (max-width: 1024px) {
+  .typo-modal-user-name {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-modal-user-name {
+    font-size: 15px;
+  }
+}
+
+/* Modal User: Email (generic for all modals) */
+.typo-modal-user-email {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 1024px) {
+  .typo-modal-user-email {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .typo-modal-user-email {
+    font-size: 12px;
+  }
+}
+/* ===========================================
+   MOBILE RESPONSIVE FIXES
+   Prevent horizontal scrolling on mobile
+   =========================================== */
+
+/* Prevent horizontal scrolling throughout the app */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+/* Ensure that all containers respect the width of the viewport */
+.w-full {
+  max-width: 100% !important;
+}
+
+/* Fix for containers that can cause overflow */
+@media (max-width: 767px) {
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Ensure that parent elements do not exceed the viewport */
+  main, section, article, div {
+    max-width: 100vw;
+  }
+  
+  /* Ensure that tables do not cause overflow */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Fix for long texts that can cause overflow */
+  p, span, h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* ===========================================
+   THEME TRANSITION ANIMATIONS
+   Smooth transitions when changing themes
+   =========================================== */
+
+/* Global transition for theme changes */
+:root {
+  --theme-transition-duration: 350ms;
+  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Elements that should animate when changing theme */
+.theme-transitioning,
+.theme-transitioning * {
+  transition:
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    fill var(--theme-transition-duration) var(--theme-transition-timing),
+    stroke var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing) !important;
+}
+
+/* Prevent transition in scroll and transform for better performance */
+.theme-transitioning *:not(.no-theme-transition) {
+  transition-property:
+    background-color,
+    border-color,
+    color,
+    fill,
+    stroke,
+    box-shadow !important;
+}
+
+/* Overlay for smooth crossfade transition */
+@keyframes theme-crossfade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes theme-crossfade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes theme-fade-overlay {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Transition Overlay Class */
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--primary);
+  animation: theme-fade-overlay 400ms ease-out forwards;
+}
+
+/* Subtle “wave” animation from the theme button */
+@keyframes theme-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.theme-ripple-effect {
+  position: fixed;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+  animation: theme-ripple 500ms ease-out forwards;
+}
+
+/* ===========================================
+   ORDERS TABLE - ROW HOVER STYLES
+   Subtle hover in rows using theme color
+   =========================================== */
+
+/* ===========================================
+   DROPDOWN MENU - TRUE FLOATING OVERLAY
+   The context menu should float above everything
+   without affecting the layout or causing reflow
+   =========================================== */
+
+/* Radix Popper Wrapper - real overlay without affecting layout */
+[data-radix-popper-content-wrapper] {
+  z-index: 100 !important;
+  position: fixed !important;
+  /* Don't force width or max-width, let Radix handle it */
+  pointer-events: auto !important;
+  /* No border on the wrapper */
+  border: none !important;
+  outline: none !important;
+  /* Isolation so that it does not affect other elements */
+  isolation: isolate;
+}
+
+/* Dropdown content - real floating overlay */
+[data-slot="dropdown-menu-content"],
+.dropdown-menu-content {
+  /* Positioning handled by Radix (position: fixed via transform) */
+  z-index: 100 !important;
+  /* Fixed width for consistency */
+  width: 12rem !important;
+  min-width: 8rem !important;
+  max-width: 14rem !important;
+  /* Borde sutil */
+  border: 1px solid var(--border) !important;
+  border-radius: 0.5rem !important;
+  /* elevation shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04) !important;
+  /* Fondo solido */
+  background-color: var(--popover) !important;
+  /* Padding interno */
+  padding: 0.25rem !important;
+  /* Overflow controlado */
+  overflow: hidden !important;
+}
+
+/* ===========================================
+   ORDERS TABLE - DELETE SCROLL BARS
+   Prevent any scroll bars
+   during animations and interactions
+   =========================================== */
+
+/* Section containing OrderTable - without scrollbars */
+.tabla-pedidos-section {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.tabla-pedidos-section::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Main table container - NEVER show scroll bars */
+.tabla-pedidos-container {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  /* Hide scrollbars in all browsers */
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+/* Ocultar scrollbars WebKit (Chrome, Safari, Edge moderno) */
+.tabla-pedidos-container::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* All container internals - no visible overflow */
+.tabla-pedidos-container * {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.tabla-pedidos-container *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Root container of the OrderTable component */
+.tabla-pedidos-root {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.tabla-pedidos-root::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Prevent scrolling during motion animations */
+.tabla-pedidos-root [style*="transform"],
+.tabla-pedidos-container [style*="transform"],
+.tabla-pedidos-root [style*="opacity"],
+.tabla-pedidos-container [style*="opacity"] {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+}
+
+.tabla-pedidos-root [style*="transform"]::-webkit-scrollbar,
+.tabla-pedidos-container [style*="transform"]::-webkit-scrollbar,
+.tabla-pedidos-root [style*="opacity"]::-webkit-scrollbar,
+.tabla-pedidos-container [style*="opacity"]::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Moving card container - no scrollbars */
+.tabla-pedidos-mobile-cards {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.tabla-pedidos-mobile-cards::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.tabla-pedidos-mobile-cards * {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.tabla-pedidos-mobile-cards *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* HTML table and its elements - without scrollbars */
+.tabla-pedidos-fixed,
+.tabla-pedidos-fixed thead,
+.tabla-pedidos-fixed tbody,
+.tabla-pedidos-fixed tr,
+.tabla-pedidos-fixed th,
+.tabla-pedidos-fixed td {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.tabla-pedidos-fixed::-webkit-scrollbar,
+.tabla-pedidos-fixed thead::-webkit-scrollbar,
+.tabla-pedidos-fixed tbody::-webkit-scrollbar,
+.tabla-pedidos-fixed tr::-webkit-scrollbar,
+.tabla-pedidos-fixed th::-webkit-scrollbar,
+.tabla-pedidos-fixed td::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Fixed table - ensure it does not cause overflow */
+.tabla-pedidos-fixed {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  overflow: hidden !important;
+}
+
+/* Row cell with hover - smooth transition */
+.row-hover-cell {
+  transition: background-color 0.15s ease-out !important;
+}
+
+/* Table row with subtle hover using theme color */
+tr.table-row-hover:hover .row-hover-cell,
+tr:has(.row-hover-cell):hover .row-hover-cell {
+  background-color: color-mix(in oklch, var(--primary) 4%, transparent) !important;
+}
+
+/* Keep visual hover of the row when the DropdownMenu of that row is open */
+/* This applies when the three dot button opens the context menu */
+/* Note: Radix UI adds data-state="open" to the trigger button when the menu is open */
+tr.table-row-hover:has(button[data-state="open"]) .row-hover-cell,
+tr.table-row-hover:has([data-state="open"]) .row-hover-cell {
+  background-color: color-mix(in oklch, var(--primary) 4%, transparent) !important;
+}
+
+.dark tr.table-row-hover:has(button[data-state="open"]) .row-hover-cell,
+.dark tr.table-row-hover:has([data-state="open"]) .row-hover-cell {
+  background-color: color-mix(in oklch, var(--primary) 8%, transparent) !important;
+}
+
+/* Dark mode - more visible hover */
+.dark tr.table-row-hover:hover .row-hover-cell,
+.dark tr:has(.row-hover-cell):hover .row-hover-cell {
+  background-color: color-mix(in oklch, var(--primary) 8%, transparent) !important;
+}
+
+/* Ensure that table cells do not have overflow that causes scrolling */
+.tabla-pedidos-fixed td,
+.tabla-pedidos-fixed th {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* Cells with content that needs controlled wrap */
+.tabla-pedidos-fixed td .truncate,
+.tabla-pedidos-fixed td span.block {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Smooth animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Shimmer animation for skeleton loading */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Bounce entrance animation */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Fade slide up */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.4s ease-out;
+}
+
+/* Glow pulse for active states */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--primary), 0 0 10px transparent;
+  }
+  50% {
+    box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Success checkmark animation */
+@keyframes successPop {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.animate-success-pop {
+  animation: successPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ============================================
+   SOLICITAR BOX LUNCH MODAL - DESIGN SYSTEM
+   ============================================ */
+
+/* CSS Variables for Modal Design - THEME-AWARE */
+/* Estos valores usan var(--primary) y se adaptan al tema seleccionado */
+:root {
+  /* Modal - Uses theme card color */
+  --modal-bg: var(--card);
+  --modal-border: var(--border);
+  --modal-radius: 16px;
+  --modal-shadow: 0px 8px 24px rgba(0,0,0,0.08), 0px 2px 8px rgba(0,0,0,0.04);
+  
+  /* Modal Header Gradient - uses theme primary tint */
+  --modal-header-gradient-start: var(--card);
+  --modal-header-gradient-end: color-mix(in oklch, var(--primary) 10%, var(--card));
+  
+  /* Header - uses theme primary */
+  --header-icon-bg: color-mix(in oklch, var(--primary) 12%, var(--background));
+  --header-icon-color: var(--primary);
+  --header-title-color: var(--foreground);
+  
+  /* Labels */
+  --label-color: var(--foreground);
+  
+  /* Inputs - Estado Default */
+  --input-bg: var(--card);
+  --input-border: var(--border);
+  --input-radius: 10px;
+  --input-height: 44px;
+  --input-text: var(--foreground);
+  --input-placeholder: var(--muted-foreground);
+  
+  /* Input Hover - uses theme primary tint */
+  --input-hover-border: color-mix(in oklch, var(--primary) 30%, var(--border));
+  --input-hover-bg: color-mix(in oklch, var(--primary) 5%, var(--card));
+  --input-hover-shadow: none;
+  --input-hover-icon: color-mix(in oklch, var(--primary) 60%, var(--muted-foreground));
+  
+  /* Input Focus - uses theme primary */
+  --input-focus-border: var(--primary);
+  --input-focus-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 15%, transparent);
+  
+  /* Input Selected - subtle theme tint */
+  --input-selected-bg: color-mix(in oklch, var(--primary) 3%, var(--card));
+  --input-selected-border: color-mix(in oklch, var(--primary) 15%, var(--border));
+  
+  /* Dropdown */
+  --dropdown-bg: var(--popover);
+  --dropdown-border: var(--border);
+  --dropdown-radius: 12px;
+  --dropdown-shadow: 0px 10px 25px rgba(0,0,0,0.12);
+  
+  /* Dropdown Items */
+  --item-padding: 12px 14px;
+  --item-radius: 8px;
+  --item-text: var(--foreground);
+  --item-hover-bg: color-mix(in oklch, var(--primary) 10%, var(--popover));
+  --item-selected-bg: var(--primary);
+  --item-selected-text: var(--primary-foreground);
+  --item-checked-bg: color-mix(in oklch, var(--primary) 12%, var(--popover));
+  --item-checked-text: var(--foreground);
+  --item-check-color: var(--primary);
+  
+  /* Buttons - uses theme primary */
+  --btn-primary-bg: var(--primary);
+  --btn-primary-text: var(--primary-foreground);
+  --btn-primary-hover: color-mix(in oklch, var(--primary) 85%, black);
+  --btn-secondary-border: var(--border);
+  --btn-secondary-text: var(--foreground);
+  --btn-secondary-hover-bg: color-mix(in oklch, var(--primary) 8%, var(--background));
+  
+  /* Separator */
+  --separator-color: var(--border);
+}
+
+/* Dark Mode - Modal Variables - THEME-AWARE */
+/* Variables use color-mix with var(--primary) and var(--card), etc.
+   which already change automatically in dark mode thanks to the theme system.
+   We only need to adjust the shadow of the modal for dark mode */
+.dark {
+  --modal-shadow: 0px 12px 32px rgba(0,0,0,0.35), 0px 4px 12px rgba(0,0,0,0.25);
+  --dropdown-shadow: 0px 12px 32px rgba(0,0,0,0.4);
+}
+
+/* ============================================
+   FORM INPUT TRIGGERS - CONTROLLED STATES
+   Estado: default → hover → focus/active
+   Solo focus/active tienen glow visible
+   ============================================ */
+
+/* Form input-style triggers - Estado DEFAULT */
+.form-input-trigger,
+.form-input-trigger[data-state] {
+  background-color: var(--input-bg) !important;
+  border-color: var(--input-border) !important; /* #E7DED7 neutro */
+  border-width: 1px !important;
+  border-radius: var(--input-radius) !important;
+  height: var(--input-height) !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  color: var(--input-text) !important;
+  box-shadow: none !important; /* No glow in default */
+  transition: border-color 150ms ease-out, background-color 150ms ease-out, box-shadow 150ms ease-out !important;
+}
+
+/* Placeholder text color - more gray to distinguish from prefilled data */
+.form-input-trigger .text-muted-foreground,
+.form-input-trigger[data-state] .text-muted-foreground,
+.form-input-trigger span.text-muted-foreground {
+  color: color-mix(in oklch, var(--muted-foreground) 60%, transparent) !important;
+  transition: color 150ms ease-out !important;
+}
+
+/* SelectValue placeholder - more gray to distinguish from selected values */
+[data-slot="select-trigger"][data-placeholder] span,
+[data-slot="select-value"][data-placeholder],
+.form-input-trigger [data-placeholder] {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent) !important;
+}
+
+/* Input placeholder general - more gray */
+input.form-input-trigger::placeholder,
+input[type="text"]::placeholder,
+input[type="search"]::placeholder,
+.search-input-neutral::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent) !important;
+}
+
+/* Icons inside form triggers - smooth transition */
+.form-input-trigger svg,
+.form-input-trigger[data-state] svg {
+  transition: color 150ms ease-out, transform 150ms ease-out !important;
+}
+
+/* HOVER status - Very soft orange for visual identity, without competing with focus */
+.form-input-trigger:hover:not(:focus):not(:focus-visible):not(:focus-within):not([data-state="open"]),
+.form-input-trigger[data-state]:hover:not(:focus):not(:focus-visible):not(:focus-within):not([data-state="open"]) {
+  background-color: var(--input-hover-bg) !important; /* #FFF5EF - naranja muy suave */
+  border-color: var(--input-hover-border) !important; /* #EFD9CA - soft warm edge */
+  box-shadow: none !important; /* No glow on hover */
+  outline: none !important;
+}
+
+.form-input-trigger:hover:not(:focus):not(:focus-within):not([data-state="open"]) .text-muted-foreground,
+.form-input-trigger[data-state]:hover:not(:focus):not(:focus-within):not([data-state="open"]) .text-muted-foreground {
+  color: color-mix(in oklch, var(--muted-foreground) 70%, transparent) !important;
+}
+
+.form-input-trigger:hover:not(:focus):not(:focus-within):not([data-state="open"]) svg,
+.form-input-trigger[data-state]:hover:not(:focus):not(:focus-within):not([data-state="open"]) svg {
+  color: var(--input-hover-icon) !important; /* Icono naranja medio suave */
+}
+
+/* Dark mode - HOVER state - THEME-AWARE: Use the primary color of the theme */
+.dark .form-input-trigger:hover:not(:focus):not(:focus-visible):not(:focus-within):not([data-state="open"]),
+.dark .form-input-trigger[data-state]:hover:not(:focus):not(:focus-visible):not(:focus-within):not([data-state="open"]) {
+  background-color: color-mix(in oklch, var(--primary) 8%, var(--card)) !important;
+  border-color: color-mix(in oklch, var(--primary) 35%, var(--border)) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.dark .form-input-trigger:hover:not(:focus):not(:focus-within):not([data-state="open"]) .text-muted-foreground,
+.dark .form-input-trigger[data-state]:hover:not(:focus):not(:focus-within):not([data-state="open"]) .text-muted-foreground {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .form-input-trigger:hover:not(:focus):not(:focus-within):not([data-state="open"]) svg,
+.dark .form-input-trigger[data-state]:hover:not(:focus):not(:focus-within):not([data-state="open"]) svg {
+  color: color-mix(in oklch, var(--primary) 60%, var(--muted-foreground)) !important;
+}
+
+/* FOCUS / ACTIVE / OPEN state - ONLY state with glow */
+.form-input-trigger:focus,
+.form-input-trigger:focus-visible,
+.form-input-trigger[data-state="open"] {
+  background-color: var(--input-bg) !important; /* Fondo blanco */
+  border-width: 1.5px !important;
+  border-color: var(--input-focus-border) !important; /* #E65C00 solid */
+  color: var(--input-text) !important;
+  box-shadow: var(--input-focus-shadow) !important; /* Glow exterior */
+  outline: none !important;
+}
+
+.form-input-trigger:focus .text-muted-foreground,
+.form-input-trigger:focus-visible .text-muted-foreground,
+.form-input-trigger[data-state="open"] .text-muted-foreground {
+  color: var(--input-placeholder) !important;
+}
+
+.form-input-trigger:focus svg,
+.form-input-trigger:focus-visible svg,
+.form-input-trigger[data-state="open"] svg {
+  color: var(--primary) !important; /* Primary Theme Color */
+}
+
+/* Dark mode - Estado FOCUS / ACTIVE / OPEN - THEME-AWARE */
+.dark .form-input-trigger:focus,
+.dark .form-input-trigger:focus-visible,
+.dark .form-input-trigger[data-state="open"] {
+  background-color: var(--card) !important;
+  border-color: var(--primary) !important;
+  color: var(--foreground) !important;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+/* All texts inside the trigger in focus/open - THEME-AWARE */
+.dark .form-input-trigger:focus span,
+.dark .form-input-trigger:focus-visible span,
+.dark .form-input-trigger[data-state="open"] span,
+.dark .form-input-trigger:focus .font-medium,
+.dark .form-input-trigger:focus-visible .font-medium,
+.dark .form-input-trigger[data-state="open"] .font-medium {
+  color: var(--foreground) !important;
+}
+
+.dark .form-input-trigger:focus .text-muted-foreground,
+.dark .form-input-trigger:focus-visible .text-muted-foreground,
+.dark .form-input-trigger[data-state="open"] .text-muted-foreground {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .form-input-trigger:focus svg,
+.dark .form-input-trigger:focus-visible svg,
+.dark .form-input-trigger[data-state="open"] svg {
+  color: var(--primary) !important;
+}
+
+/* Selected state - when value is selected (no glow, solo borde) */
+.form-input-trigger.has-value:not(:focus):not([data-state="open"]),
+.form-input-trigger[data-has-value="true"]:not(:focus):not([data-state="open"]) {
+  background-color: var(--input-selected-bg) !important;
+  border-color: var(--input-selected-border) !important;
+  box-shadow: none !important; /* No glow when it has value but is not in focus */
+}
+
+/* Textarea specific styles - Estado DEFAULT */
+textarea.form-input-trigger {
+  background-color: var(--input-bg) !important;
+  border-color: var(--input-border) !important; /* #E7DED7 neutro */
+  border-width: 1px !important;
+  border-radius: var(--input-radius) !important;
+  color: var(--input-text) !important;
+  padding: 14px !important;
+  min-height: 80px !important;
+  height: auto !important;
+  box-shadow: none !important; /* No glow in default */
+  transition: border-color 150ms ease-out, background-color 150ms ease-out, box-shadow 150ms ease-out !important;
+}
+
+textarea.form-input-trigger::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent) !important;
+  transition: color 150ms ease-out !important;
+}
+
+/* Clearer textarea placeholder to avoid confusion with filled text */
+textarea.form-input-trigger:not(:focus)::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent) !important;
+  font-weight: 400 !important;
+}
+
+/* Textarea - HOVER state (very soft orange, not competing with focus) */
+textarea.form-input-trigger:hover:not(:focus):not(:focus-visible):not(:focus-within) {
+  background-color: var(--input-hover-bg) !important; /* Fondo naranja muy suave */
+  border-color: var(--input-hover-border) !important; /* Soft warm edge */
+  box-shadow: none !important; /* No glow on hover */
+  outline: none !important;
+}
+
+textarea.form-input-trigger:hover:not(:focus):not(:focus-within)::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent) !important;
+}
+
+.dark textarea.form-input-trigger:hover:not(:focus):not(:focus-visible):not(:focus-within) {
+  background-color: color-mix(in oklch, var(--primary) 8%, var(--card)) !important;
+  border-color: color-mix(in oklch, var(--primary) 35%, var(--border)) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.dark textarea.form-input-trigger:hover:not(:focus):not(:focus-within)::placeholder {
+  color: var(--muted-foreground) !important;
+}
+
+/* Textarea - FOCUS status (only with glow) */
+textarea.form-input-trigger:focus {
+  background-color: var(--input-bg) !important; /* Fondo blanco */
+  border-width: 1.5px !important;
+  border-color: var(--input-focus-border) !important; /* #E65C00 solid */
+  color: var(--input-text) !important;
+  box-shadow: var(--input-focus-shadow) !important; /* Glow exterior */
+  outline: none !important;
+}
+
+textarea.form-input-trigger:focus::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent) !important;
+}
+
+.dark textarea.form-input-trigger:focus {
+  background-color: var(--card) !important;
+  border-color: var(--primary) !important;
+  color: var(--foreground) !important;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+.dark textarea.form-input-trigger:focus::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 70%, transparent) !important;
+}
+
+/* Calendar day - all buttons are perfect circles */
+[data-slot="calendar"] button {
+  border-radius: 9999px !important;
+  outline: none !important;
+}
+
+/* Remove any square outlines on focus */
+[data-slot="calendar"] button:focus,
+[data-slot="calendar"] button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Calendar day selected states - uses theme primary color */
+[data-slot="calendar"] button[data-selected-single="true"],
+[data-slot="calendar"] button[data-range-single="true"],
+[data-slot="calendar"] button[data-range-start="true"],
+[data-slot="calendar"] button[data-range-end="true"] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  border-radius: 9999px !important;
+}
+
+/* Calendar day selected hover states - slightly darker using filter */
+[data-slot="calendar"] button[data-selected-single="true"]:hover,
+[data-slot="calendar"] button[data-range-single="true"]:hover,
+[data-slot="calendar"] button[data-range-start="true"]:hover,
+[data-slot="calendar"] button[data-range-end="true"]:hover {
+  background-color: var(--primary) !important;
+  filter: brightness(0.9) !important;
+  color: var(--primary-foreground) !important;
+  border-radius: 9999px !important;
+}
+
+/* Dark mode calendar selected states */
+.dark [data-slot="calendar"] button[data-selected-single="true"],
+.dark [data-slot="calendar"] button[data-range-single="true"],
+.dark [data-slot="calendar"] button[data-range-start="true"],
+.dark [data-slot="calendar"] button[data-range-end="true"] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  border-radius: 9999px !important;
+}
+
+.dark [data-slot="calendar"] button[data-selected-single="true"]:hover,
+.dark [data-slot="calendar"] button[data-range-single="true"]:hover,
+.dark [data-slot="calendar"] button[data-range-start="true"]:hover,
+.dark [data-slot="calendar"] button[data-range-end="true"]:hover {
+  background-color: var(--primary) !important;
+  filter: brightness(1.1) !important;
+  color: var(--primary-foreground) !important;
+  border-radius: 9999px !important;
+}
+
+/* Range middle dates - keep dark text */
+[data-slot="calendar"] button[data-range-middle="true"] {
+  color: var(--foreground) !important;
+}
+
+/* Unselected day hover - light primary tint with primary text, circular */
+[data-slot="calendar"] button:not([data-selected-single="true"]):not([data-range-single="true"]):not([data-range-start="true"]):not([data-range-end="true"]):not([data-range-middle="true"]):hover {
+  background-color: color-mix(in oklch, var(--primary) 12%, var(--background)) !important;
+  color: var(--primary) !important;
+  border-radius: 9999px !important;
+}
+
+.dark [data-slot="calendar"] button:not([data-selected-single="true"]):not([data-range-single="true"]):not([data-range-start="true"]):not([data-range-end="true"]):not([data-range-middle="true"]):hover {
+  background-color: color-mix(in oklch, var(--primary) 18%, var(--background)) !important;
+  color: var(--primary) !important;
+  border-radius: 9999px !important;
+}
+
+/* Range middle hover - keep dark text, subtle highlight */
+[data-slot="calendar"] button[data-range-middle="true"]:hover {
+  background-color: color-mix(in oklch, var(--primary) 15%, var(--background)) !important;
+  color: var(--primary) !important;
+}
+
+.dark [data-slot="calendar"] button[data-range-middle="true"]:hover {
+  background-color: color-mix(in oklch, var(--primary) 20%, var(--background)) !important;
+  color: var(--primary) !important;
+}
+
+/* ===========================================
+   CALENDAR NAVIGATION ARROWS - THEME-AWARE
+   Calendar navigation arrows
+   =========================================== */
+
+/* Calendar navigation buttons (previous/next month arrows) */
+[data-slot="calendar"] .rdp-button_previous,
+[data-slot="calendar"] .rdp-button_next,
+[data-slot="calendar"] button[name="previous-month"],
+[data-slot="calendar"] button[name="next-month"] {
+  color: var(--muted-foreground) !important;
+  transition: color 0.15s ease-out, background-color 0.15s ease-out !important;
+}
+
+/* Calendar nav arrows - hover state */
+[data-slot="calendar"] .rdp-button_previous:hover,
+[data-slot="calendar"] .rdp-button_next:hover,
+[data-slot="calendar"] button[name="previous-month"]:hover,
+[data-slot="calendar"] button[name="next-month"]:hover {
+  color: var(--primary) !important;
+  background-color: color-mix(in oklch, var(--primary) 10%, var(--background)) !important;
+}
+
+/* Calendar nav arrows - active/pressed state */
+[data-slot="calendar"] .rdp-button_previous:active,
+[data-slot="calendar"] .rdp-button_next:active,
+[data-slot="calendar"] button[name="previous-month"]:active,
+[data-slot="calendar"] button[name="next-month"]:active {
+  color: var(--primary) !important;
+  background-color: color-mix(in oklch, var(--primary) 18%, var(--background)) !important;
+}
+
+/* ===========================================
+   CALENDAR "TODAY" BUTTON - THEME-AWARE
+   Calendar "Today" button
+   =========================================== */
+
+/* Elegant outline button for "Hoy" - theme adaptive */
+.calendar-today-btn {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 3%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 5%, transparent) 100%
+  ) !important;
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, var(--border)) !important;
+  color: var(--primary) !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  padding: 4px 10px !important;
+  
+  transition:
+    background 0.2s ease-out,
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    transform 0.15s ease-out,
+    color 0.15s ease-out !important;
+}
+
+/* Hover - Glow with theme color */
+.calendar-today-btn:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 8%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 12%, transparent) 100%
+  ) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  box-shadow:
+    0 2px 8px color-mix(in oklch, var(--primary) 20%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 10%, transparent) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Active - Presionado */
+.calendar-today-btn:active {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 12%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 16%, transparent) 100%
+  ) !important;
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow:
+    0 1px 3px color-mix(in oklch, var(--primary) 15%, transparent),
+    inset 0 1px 2px color-mix(in oklch, var(--primary) 5%, transparent) !important;
+}
+
+/* Focus - Accessibility Ring */
+.calendar-today-btn:focus,
+.calendar-today-btn:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 2px 6px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+}
+
+/* Dark mode adjustments */
+.dark .calendar-today-btn {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 8%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 10%, transparent) 100%
+  ) !important;
+  border-color: color-mix(in oklch, var(--primary) 35%, var(--border)) !important;
+}
+
+.dark .calendar-today-btn:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 15%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 20%, transparent) 100%
+  ) !important;
+  border-color: var(--primary) !important;
+  box-shadow:
+    0 2px 10px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+}
+
+/* Dropdown Container Styles */
+[data-slot="select-content"],
+[data-slot="popover-content"] {
+  background-color: var(--dropdown-bg) !important;
+  border: 1px solid var(--dropdown-border) !important;
+  border-radius: var(--dropdown-radius) !important;
+  box-shadow: var(--dropdown-shadow) !important;
+}
+
+/* Dropdown Item - Default */
+[data-slot="select-item"] {
+  padding: var(--item-padding) !important;
+  border-radius: var(--item-radius) !important;
+  color: var(--item-text) !important;
+  transition: all 0.15s ease !important;
+}
+
+/* Dropdown Item - Hover */
+[data-slot="select-item"]:hover {
+  background-color: var(--item-hover-bg) !important;
+  color: var(--item-text) !important;
+}
+
+/* Dropdown Item - Selected (highlighted with keyboard/focus) */
+[data-slot="select-item"]:focus,
+[data-slot="select-item"][data-highlighted] {
+  background-color: var(--item-selected-bg) !important;
+  color: var(--item-selected-text) !important;
+}
+
+/* All text inside highlighted items should be white */
+[data-slot="select-item"]:focus span,
+[data-slot="select-item"]:focus .text-muted-foreground,
+[data-slot="select-item"][data-highlighted] span,
+[data-slot="select-item"][data-highlighted] .text-muted-foreground {
+  color: var(--item-selected-text) !important;
+}
+
+/* Check icon in select items when highlighted/focused */
+[data-slot="select-item"]:focus [data-slot="select-item-indicator"] svg,
+[data-slot="select-item"][data-highlighted] [data-slot="select-item-indicator"] svg,
+[data-slot="select-item"]:focus svg,
+[data-slot="select-item"][data-highlighted] svg {
+  color: var(--item-selected-text) !important;
+}
+
+/* Previously selected state (checked) - warm orange-tinted background */
+[data-slot="select-item"][data-state="checked"] {
+  background-color: var(--item-checked-bg) !important;
+  color: var(--item-checked-text) !important;
+  font-weight: 500 !important;
+}
+
+/* Check icon for previously selected item - orange accent */
+[data-slot="select-item"][data-state="checked"] svg {
+  color: var(--item-check-color) !important;
+}
+
+/* Text inside previously selected item - slightly darker for emphasis */
+[data-slot="select-item"][data-state="checked"] span:not(.text-muted-foreground) {
+  font-weight: 500 !important;
+  color: var(--foreground) !important;
+}
+
+/* Avatar initials in previously selected item - keep white text */
+[data-slot="select-item"][data-state="checked"] [data-slot="avatar-fallback"],
+[data-slot="select-item"][data-state="checked"] span[class*="text-white"] {
+  color: var(--primary-foreground) !important;
+}
+
+/* Muted text (email) in previously selected item - subtle warmth */
+[data-slot="select-item"][data-state="checked"] .text-muted-foreground {
+  color: var(--muted-foreground) !important;
+}
+
+/* Dark mode - Previously selected state (checked) - VISIBLE text with theme accent */
+.dark [data-slot="select-item"][data-state="checked"] {
+  background-color: var(--item-checked-bg) !important;
+  color: var(--foreground) !important;
+  font-weight: 500 !important;
+}
+
+/* Dark mode - Check icon for previously selected item - orange accent */
+.dark [data-slot="select-item"][data-state="checked"] svg {
+  color: var(--item-check-color) !important; /* Naranja */
+}
+
+/* Dark mode - Text inside previously selected item */
+.dark [data-slot="select-item"][data-state="checked"] span:not(.text-muted-foreground) {
+  font-weight: 500 !important;
+  color: oklch(0.95 0.01 60) !important; /* Texto blanco visible */
+}
+
+/* Dark mode - Muted text in previously selected item */
+.dark [data-slot="select-item"][data-state="checked"] .text-muted-foreground {
+  color: oklch(0.75 0.02 50) !important;
+}
+
+/* When previously selected item is also highlighted/focused */
+[data-slot="select-item"][data-state="checked"]:focus,
+[data-slot="select-item"][data-state="checked"][data-highlighted] {
+  background-color: var(--item-selected-bg) !important;
+  color: var(--item-selected-text) !important;
+}
+
+[data-slot="select-item"][data-state="checked"]:focus svg,
+[data-slot="select-item"][data-state="checked"][data-highlighted] svg {
+  color: var(--item-selected-text) !important;
+}
+
+[data-slot="select-item"][data-state="checked"]:focus span,
+[data-slot="select-item"][data-state="checked"]:focus .text-muted-foreground,
+[data-slot="select-item"][data-state="checked"][data-highlighted] span,
+[data-slot="select-item"][data-state="checked"][data-highlighted] .text-muted-foreground {
+  color: var(--item-selected-text) !important;
+}
+
+[data-slot="dropdown-menu-item"]:focus,
+[data-slot="dropdown-menu-item"]:hover,
+[data-slot="dropdown-menu-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+/* Icons inside dropdown items when hovered/focused */
+[data-slot="dropdown-menu-item"]:focus svg,
+[data-slot="dropdown-menu-item"]:hover svg,
+[data-slot="dropdown-menu-item"][data-highlighted] svg {
+  color: var(--primary-foreground) !important;
+}
+
+/* Spans inside dropdown items when hovered/focused */
+[data-slot="dropdown-menu-item"]:focus span,
+[data-slot="dropdown-menu-item"]:hover span,
+[data-slot="dropdown-menu-item"][data-highlighted] span {
+  color: var(--primary-foreground) !important;
+}
+
+[data-slot="dropdown-menu-checkbox-item"]:focus,
+[data-slot="dropdown-menu-checkbox-item"]:hover,
+[data-slot="dropdown-menu-checkbox-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+[data-slot="dropdown-menu-radio-item"]:focus,
+[data-slot="dropdown-menu-radio-item"]:hover,
+[data-slot="dropdown-menu-radio-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+[data-slot="dropdown-menu-sub-trigger"]:focus,
+[data-slot="dropdown-menu-sub-trigger"]:hover,
+[data-slot="dropdown-menu-sub-trigger"][data-highlighted],
+[data-slot="dropdown-menu-sub-trigger"][data-state="open"] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+/* Dark mode soft hover - uses theme primary for consistency */
+.dark [data-slot="select-item"]:focus,
+.dark [data-slot="select-item"]:hover,
+.dark [data-slot="select-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+/* Text inside items hover in dark mode */
+.dark [data-slot="select-item"]:focus span,
+.dark [data-slot="select-item"]:hover span,
+.dark [data-slot="select-item"][data-highlighted] span,
+.dark [data-slot="select-item"]:focus .text-muted-foreground,
+.dark [data-slot="select-item"]:hover .text-muted-foreground,
+.dark [data-slot="select-item"][data-highlighted] .text-muted-foreground {
+  color: var(--primary-foreground) !important;
+}
+
+.dark [data-slot="dropdown-menu-item"]:focus,
+.dark [data-slot="dropdown-menu-item"]:hover,
+.dark [data-slot="dropdown-menu-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+.dark [data-slot="dropdown-menu-item"]:focus svg,
+.dark [data-slot="dropdown-menu-item"]:hover svg,
+.dark [data-slot="dropdown-menu-item"][data-highlighted] svg {
+  color: var(--primary-foreground) !important;
+}
+
+.dark [data-slot="dropdown-menu-item"]:focus span,
+.dark [data-slot="dropdown-menu-item"]:hover span,
+.dark [data-slot="dropdown-menu-item"][data-highlighted] span {
+  color: var(--primary-foreground) !important;
+}
+
+.dark [data-slot="dropdown-menu-checkbox-item"]:focus,
+.dark [data-slot="dropdown-menu-checkbox-item"]:hover,
+.dark [data-slot="dropdown-menu-checkbox-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+.dark [data-slot="dropdown-menu-radio-item"]:focus,
+.dark [data-slot="dropdown-menu-radio-item"]:hover,
+.dark [data-slot="dropdown-menu-radio-item"][data-highlighted] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+.dark [data-slot="dropdown-menu-sub-trigger"]:focus,
+.dark [data-slot="dropdown-menu-sub-trigger"]:hover,
+.dark [data-slot="dropdown-menu-sub-trigger"][data-highlighted],
+.dark [data-slot="dropdown-menu-sub-trigger"][data-state="open"] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+/* Command input (search field in employee selector) */
+[data-slot="command-input-wrapper"] {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-color: var(--border) !important;
+}
+
+[data-slot="command-input-wrapper"]:has([data-slot="command-input"]:focus) {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+[data-slot="command-input"] {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-slot="command-input"]::placeholder {
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-slot="command-input"]:focus {
+  color: var(--foreground) !important;
+}
+
+[data-slot="command-input"]:focus::placeholder {
+  color: var(--muted-foreground) !important;
+}
+
+/* Search icon in command input */
+[data-slot="command-input-wrapper"] svg {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-slot="command-input-wrapper"]:has([data-slot="command-input"]:focus) svg {
+  color: var(--primary) !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode command input - THEME-AWARE */
+.dark [data-slot="command-input-wrapper"]:has([data-slot="command-input"]:focus) {
+  background-color: var(--card) !important;
+  border-color: var(--primary) !important;
+}
+
+.dark [data-slot="command-input"]:focus {
+  color: var(--foreground) !important;
+}
+
+.dark [data-slot="command-input"]:focus::placeholder {
+  color: var(--muted-foreground) !important;
+}
+
+.dark [data-slot="command-input-wrapper"]:has([data-slot="command-input"]:focus) svg {
+  color: var(--primary) !important;
+}
+
+/* CommandItem hover/selection - warm peach tones */
+[data-slot="command-item"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-slot="command-item"]:hover {
+  transform: translateX(2px);
+}
+
+/* Grain texture overlay */
+.grain-texture {
+  position: relative;
+}
+
+.grain-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ============================================
+   BOX LUNCH MODAL - SPECIFIC STYLES
+   ============================================ */
+
+/* Modal Container - centered via DialogContent's fixed positioning */
+/* IMPORTANT: The modal should NOT have hover effects */
+.box-lunch-modal {
+  background-color: var(--modal-bg) !important;
+  border: 1px solid var(--modal-border) !important;
+  border-radius: var(--modal-radius) !important;
+  box-shadow: var(--modal-shadow) !important;
+  overflow: hidden !important;
+  /* Position is handled by DialogContent: fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] */
+}
+
+/* ===========================================
+   BOX LUNCH MODAL - MOBILE RESPONSIVE
+   Reduce width on mobile so that it does not take up the entire screen
+   =========================================== */
+@media (max-width: 640px) {
+  .box-lunch-modal {
+    /* Width is controlled from Tailwind in the component */
+    /* Only apply appearance styles */
+  }
+  
+  /* Modal header - more compact */
+  .box-lunch-modal-header {
+    padding: 18px 18px 14px 18px !important;
+  }
+  
+  /* Smaller header icon */
+  .box-lunch-modal .modal-icon-circle {
+    padding: 8px !important;
+  }
+  
+  .box-lunch-modal .modal-icon-circle svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  /* Modal Title - Mobile Optimized Size */
+  .box-lunch-modal .modal-title {
+    font-size: 17px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Form content - reduced padding */
+  .box-lunch-modal form {
+    padding: 14px 16px 16px 16px !important;
+  }
+  
+  /* Field labels */
+  .box-lunch-modal .modal-label {
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  /* Icons on labels */
+  .box-lunch-modal .modal-label svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  /* Inputs and triggers - optimized height and typography */
+  .box-lunch-modal .form-input-trigger {
+    height: 40px !important;
+    min-height: 40px !important;
+    font-size: 12px !important;
+    padding-left: 10px !important;
+    padding-right: 8px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Arrows icon (ChevronsUpDown) inside the trigger - avoid overflow */
+  .box-lunch-modal .form-input-trigger svg.lucide-chevrons-up-down {
+    width: 12px !important;
+    height: 12px !important;
+    flex-shrink: 0 !important;
+    margin-left: 4px !important;
+  }
+  
+  /* Text inside triggers */
+  .box-lunch-modal .form-input-trigger span,
+  .box-lunch-modal .form-input-trigger .font-medium {
+    font-size: 12px !important;
+  }
+  
+  /* Secondary email/text in trigger */
+  .box-lunch-modal .form-input-trigger .text-\[11px\],
+  .box-lunch-modal .form-input-trigger .text-xs {
+    font-size: 12px !important;
+  }
+  
+  /* Avatar in the trigger */
+  .box-lunch-modal .form-input-trigger [data-slot="avatar"],
+  .box-lunch-modal .form-input-trigger img.h-7 {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+  }
+  
+  /* Input icons */
+  .box-lunch-modal .form-input-trigger svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Textarea */
+  .box-lunch-modal textarea.form-input-trigger {
+    font-size: 12px !important;
+    padding: 10px 12px !important;
+    min-height: 70px !important;
+    border-radius: 8px !important;
+  }
+  
+  .box-lunch-modal textarea.form-input-trigger::placeholder {
+    font-size: 12px !important;
+  }
+  
+  /* Date and time grid - more compact */
+  .box-lunch-modal .grid.grid-cols-2 {
+    gap: 10px !important;
+  }
+  
+  /* Footer buttons */
+  .box-lunch-modal .modal-separator {
+    padding-top: 14px !important;
+    margin-top: 16px !important;
+  }
+  
+  /* Footer buttons - EXCEPT modal-btn-secondary which has its own styles */
+  .box-lunch-modal .elegant-outline-btn:not(.modal-btn-secondary),
+  .box-lunch-modal .nueva-solicitud-btn:not(.modal-btn-primary) {
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Close modal button */
+  .box-lunch-modal .modal-close-btn {
+    width: 28px !important;
+    height: 28px !important;
+    top: 12px !important;
+    right: 12px !important;
+  }
+  
+  .box-lunch-modal .modal-close-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Error messages */
+  .box-lunch-modal .text-sm.text-destructive {
+    font-size: 12px !important;
+  }
+  
+  /* Smaller decorative circles on mobile */
+  .box-lunch-modal::before {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .box-lunch-modal::after {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+
+/* ===========================================
+   ORDER DETAILS MODAL - MOBILE RESPONSIVE
+   Mobile order details modal
+   12px typography for content, 17px title
+   Tight width with wide margins for visual space
+   =========================================== */
+@media (max-width: 640px) {
+  /* Details modal width - FORCE with maximum specificity */
+
+
+
+
+
+
+
+
+
+  
+  /* Details modal header */
+  .order-details-modal .order-details-header,
+  .order-details-modal .box-lunch-modal-header {
+    padding: 14px 14px 10px 14px !important;
+  }
+  
+  /* Smaller header icon */
+  .order-details-modal .modal-icon-circle {
+    padding: 5px !important;
+  }
+  
+  .order-details-modal .modal-icon-circle svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Details Modal Title - 17px as requested */
+  .order-details-modal .modal-title,
+  .order-details-modal [data-slot="dialog-title"],
+  .order-details-modal h2 {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+  }
+  
+  /* Details modal content - adjusted padding */
+  .order-details-modal .order-details-content {
+    padding: 10px 14px 12px 14px !important;
+  }
+  
+  /* Status badge - 12px typography */
+  .order-details-modal .text-sm.font-semibold,
+  .order-details-modal [data-slot="badge"] {
+    font-size: 12px !important;
+    padding: 3px 8px !important;
+  }
+  
+  /* Status center - reduced padding */
+  .order-details-modal .flex.justify-center.py-3 {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+  
+  /* Information sections (employee, date, time, place) - reduced gap */
+  .order-details-modal .flex.items-start.gap-3,
+  .order-details-modal .flex.items-center.gap-3,
+  .order-details-modal .flex.items-start.gap-4,
+  .order-details-modal .flex.items-center.gap-4 {
+    gap: 6px !important;
+  }
+  
+  /* Section icons (p-2 rounded-lg bg-secondary) */
+  .order-details-modal .p-2.rounded-lg {
+    padding: 4px !important;
+  }
+  
+  .order-details-modal .p-2.rounded-lg svg,
+  .order-details-modal svg.h-4.w-4,
+  .order-details-modal svg.h-3.w-3 {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  /* Employee avatar - smaller */
+  .order-details-modal .h-14.w-14 {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  /* ===== ALL TYPOGRAPHY AT 12px ===== */
+  
+  /* Small labels "Employee", "Date", etc. */
+  .order-details-modal .text-xs.text-muted-foreground,
+  .order-details-modal .text-xs {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Employee name */
+  .order-details-modal .font-semibold.text-lg,
+  .order-details-modal p.font-semibold {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Section values ​​(date, time, place) */
+  .order-details-modal .font-medium,
+  .order-details-modal p.font-medium {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+  
+  /* Hora monoespaciada */
+  .order-details-modal .font-medium.font-mono,
+  .order-details-modal p.font-mono {
+    font-size: 12px !important;
+  }
+  
+  /* Employee email */
+  .order-details-modal .truncate,
+  .order-details-modal p.truncate {
+    font-size: 12px !important;
+  }
+  
+  /* Date capitalize text */
+  .order-details-modal .capitalize,
+  .order-details-modal p.capitalize {
+    font-size: 12px !important;
+  }
+  
+  /* All paragraphs of the modal */
+  .order-details-modal p {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Todos los spans (excepto sr-only) */
+  .order-details-modal span:not(.sr-only) {
+    font-size: 12px !important;
+  }
+  
+  /* Grid with separator - compact spacing */
+  .order-details-modal .grid.gap-4 {
+    gap: 8px !important;
+    padding-top: 8px !important;
+  }
+  
+  /* Order registration section */
+  .order-details-modal .mt-2.pt-4 {
+    margin-top: 4px !important;
+    padding-top: 8px !important;
+  }
+  
+  .order-details-modal .px-3.py-2\.5 {
+    padding: 5px 7px !important;
+  }
+  
+  /* Label "Registered order" */
+  .order-details-modal .text-xs.font-medium.text-muted-foreground.uppercase {
+    font-size: 10px !important;
+  }
+  
+  /* Registration date and time */
+  .order-details-modal .text-sm.font-semibold.text-foreground\/80 {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Text "at" inside the record */
+  .order-details-modal .text-muted-foreground.font-normal {
+    font-size: 12px !important;
+  }
+  
+  /* Close button - readable size */
+  .order-details-modal .flex.justify-end.pt-2 {
+    padding-top: 8px !important;
+  }
+  
+  .order-details-modal .elegant-outline-btn {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+  }
+  
+  .order-details-modal .elegant-outline-btn svg {
+    width: 12px !important;
+    height: 12px !important;
+    margin-right: 4px !important;
+  }
+  
+  /* Close X button (top corner) */
+  .order-details-modal button[data-radix-dialog-close],
+  .order-details-modal [data-slot="dialog-close"],
+  .order-details-modal .modal-close-btn {
+    width: 22px !important;
+    height: 22px !important;
+    top: 8px !important;
+    right: 8px !important;
+  }
+  
+  .order-details-modal button[data-radix-dialog-close] svg,
+  .order-details-modal [data-slot="dialog-close"] svg,
+  .order-details-modal .modal-close-btn svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+  
+  /* Smaller decorative circles on mobile */
+  .order-details-modal::before {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .order-details-modal::after {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+  /* Mobile content scroll */
+  .box-lunch-modal .mobile-modal-scrollable {
+    max-height: calc(100vh - 280px) !important;
+    overflow-y: auto !important;
+    padding: 14px 16px 10px 16px !important;
+  }
+
+  /* Modal buttons - reduced spacing */
+  .box-lunch-modal .mobile-modal-buttons {
+    border-top: 1px solid var(--separator-color) !important;
+    padding-top: 12px !important;
+    margin-top: 8px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+/* ===========================================
+   CALENDAR DATE PICKER - MOBILE RESPONSIVE
+   Adjust calendar size on mobile
+   =========================================== */
+
+@media (max-width: 640px) {
+  /* Calendar popover container - more compact on mobile */
+  .box-lunch-modal [data-slot="popover-content"]:has([data-slot="calendar"]) {
+    padding: 8px !important;
+    width: auto !important;
+    min-width: unset !important;
+  }
+  
+  /* Complete calendar - reduce cell size */
+  .box-lunch-modal [data-slot="calendar"] {
+    --cell-size: 28px !important;
+    padding: 6px !important;
+    font-size: 12px !important;
+  }
+  
+  /* ===========================================
+     CALENDAR – MOBILE TYPOGRAPHY SETTINGS
+     - Central title (month/year): 13px
+     - Day numbers and secondary texts: 12px
+     =========================================== */
+  
+  /* Month and year title (center of calendar) - 13px as main title */
+  [data-slot="calendar"] .rdp-caption_label,
+  [data-slot="calendar"] [class*="caption_label"],
+  [data-slot="calendar"] .rdp-month_caption > span,
+  [data-slot="calendar"] [class*="month_caption"] > span,
+  .box-lunch-modal [data-slot="calendar"] .rdp-caption_label,
+  .box-lunch-modal [data-slot="calendar"] [class*="caption_label"],
+  .box-lunch-modal [data-slot="calendar"] .rdp-month_caption > span,
+  .box-lunch-modal [data-slot="calendar"] [class*="month_caption"] > span,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-caption_label,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="caption_label"],
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-month_caption > span,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="month_caption"] > span {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Calendar header (month/year dropdowns) - secondary texts in 12px */
+  [data-slot="calendar"] .rdp-dropdowns,
+  [data-slot="calendar"] [class*="dropdowns"],
+  .box-lunch-modal [data-slot="calendar"] .rdp-dropdowns,
+  .box-lunch-modal [data-slot="calendar"] [class*="dropdowns"],
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-dropdowns,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="dropdowns"] {
+    font-size: 12px !important;
+  }
+  
+  /* Names of days of the week - 12px (same as numbers) */
+  [data-slot="calendar"] .rdp-weekday,
+  [data-slot="calendar"] [class*="weekday"],
+  .box-lunch-modal [data-slot="calendar"] .rdp-weekday,
+  .box-lunch-modal [data-slot="calendar"] [class*="weekday"],
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-weekday,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="weekday"] {
+    font-size: 12px !important;
+    height: 24px !important;
+  }
+  
+  /* Calendar day buttons - numbers in 12px */
+  [data-slot="calendar"] .rdp-day button,
+  [data-slot="calendar"] .rdp-day_button,
+  [data-slot="calendar"] [class*="day"] button,
+  .box-lunch-modal [data-slot="calendar"] .rdp-day button,
+  .box-lunch-modal [data-slot="calendar"] .rdp-day_button,
+  .box-lunch-modal [data-slot="calendar"] [class*="day"] button,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-day button,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-day_button,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="day"] button {
+    font-size: 12px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+  
+  /* Calendar cells with day numbers */
+  [data-slot="calendar"] td,
+  [data-slot="calendar"] td button,
+  [data-slot="calendar"] .rdp-cell,
+  [data-slot="calendar"] .rdp-cell button,
+  .box-lunch-modal [data-slot="calendar"] td,
+  .box-lunch-modal [data-slot="calendar"] td button,
+  .box-lunch-modal [data-slot="calendar"] .rdp-cell,
+  .box-lunch-modal [data-slot="calendar"] .rdp-cell button,
+  [data-slot="popover-content"] [data-slot="calendar"] td,
+  [data-slot="popover-content"] [data-slot="calendar"] td button,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-cell,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-cell button {
+    font-size: 12px !important;
+  }
+  
+  /* Calendar navigation arrows */
+  [data-slot="calendar"] .rdp-button_previous,
+  [data-slot="calendar"] .rdp-button_next,
+  [data-slot="calendar"] [class*="button_previous"],
+  [data-slot="calendar"] [class*="button_next"],
+  .box-lunch-modal [data-slot="calendar"] .rdp-button_previous,
+  .box-lunch-modal [data-slot="calendar"] .rdp-button_next,
+  .box-lunch-modal [data-slot="calendar"] [class*="button_previous"],
+  .box-lunch-modal [data-slot="calendar"] [class*="button_next"],
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-button_previous,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-button_next,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="button_previous"],
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="button_next"] {
+    width: 26px !important;
+    height: 26px !important;
+    padding: 4px !important;
+  }
+  
+  [data-slot="calendar"] .rdp-button_previous svg,
+  [data-slot="calendar"] .rdp-button_next svg,
+  [data-slot="calendar"] [class*="button_previous"] svg,
+  [data-slot="calendar"] [class*="button_next"] svg,
+  .box-lunch-modal [data-slot="calendar"] .rdp-button_previous svg,
+  .box-lunch-modal [data-slot="calendar"] .rdp-button_next svg,
+  .box-lunch-modal [data-slot="calendar"] [class*="button_previous"] svg,
+  .box-lunch-modal [data-slot="calendar"] [class*="button_next"] svg,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-button_previous svg,
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-button_next svg,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="button_previous"] svg,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="button_next"] svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Calendar table - more compact */
+  [data-slot="calendar"] table,
+  .box-lunch-modal [data-slot="calendar"] table,
+  [data-slot="popover-content"] [data-slot="calendar"] table {
+    border-spacing: 1px !important;
+  }
+  
+  /* Caption (month/year in header) */
+  [data-slot="calendar"] .rdp-month_caption,
+  [data-slot="calendar"] [class*="month_caption"],
+  .box-lunch-modal [data-slot="calendar"] .rdp-month_caption,
+  .box-lunch-modal [data-slot="calendar"] [class*="month_caption"],
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-month_caption,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="month_caption"] {
+    height: 28px !important;
+    padding: 0 28px !important;
+  }
+  
+  /* Week number (si se muestra) */
+  [data-slot="calendar"] .rdp-week_number,
+  [data-slot="calendar"] [class*="week_number"],
+  .box-lunch-modal [data-slot="calendar"] .rdp-week_number,
+  .box-lunch-modal [data-slot="calendar"] [class*="week_number"],
+  [data-slot="popover-content"] [data-slot="calendar"] .rdp-week_number,
+  [data-slot="popover-content"] [data-slot="calendar"] [class*="week_number"] {
+    font-size: 10px !important;
+  }
+
+  /* Time Dropdown - smaller items on mobile */
+  /* Apply to ALL SelectContent to ensure time works */
+  [data-slot="select-content"] {
+    font-size: 12px !important;
+    max-height: 250px !important;
+  }
+  
+  [data-slot="select-content"] [data-slot="select-item"] {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+    min-height: 32px !important;
+  }
+  
+  [data-slot="select-content"] [data-slot="select-item"] span {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Period headers (Morning, Noon, Afternoon) - more compact */
+  [data-slot="select-content"] .text-sm,
+  [data-slot="select-content"] div[class*="bg-muted"] {
+    font-size: 10px !important;
+    padding: 4px 10px !important;
+    line-height: 1.2 !important;
+  }
+}
+/* ===========================================
+   EMPLOYEE POPOVER - MOBILE RESPONSIVE
+   Reduce size on mobile for better usability
+   =========================================== */
+@media (max-width: 640px) {
+  .mobile-employee-popover {
+    max-width: calc(100vw - 48px) !important;
+    width: calc(100% - 16px) !important;
+    min-width: 0 !important;
+    font-size: 12px !important;
+  }
+  
+  /* Search input on mobile */
+  .mobile-employee-popover .employee-search-zone {
+    padding: 8px !important;
+  }
+  
+  .mobile-employee-popover .search-input-neutral {
+    font-size: 12px !important;
+    height: 36px !important;
+    padding-left: 32px !important;
+  }
+  
+  .mobile-employee-popover .search-icon {
+    width: 14px !important;
+    height: 14px !important;
+    left: 10px !important;
+  }
+  
+  /* Employee list - more compact */
+  .mobile-employee-popover [cmdk-item] {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Smaller avatar on mobile */
+  .mobile-employee-popover [cmdk-item] [data-slot="avatar"],
+  .mobile-employee-popover [cmdk-item] img {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+  }
+  
+  /* Name text */
+  .mobile-employee-popover [cmdk-item] .font-medium {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* smaller email */
+  .mobile-employee-popover [cmdk-item] .text-xs,
+  .mobile-employee-popover [cmdk-item] .text-muted-foreground {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Check icon */
+  .mobile-employee-popover [cmdk-item] svg.lucide-check {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Reduce maximum list height for mobile */
+  .mobile-employee-popover .employee-list-scroll {
+    max-height: 220px !important;
+  }
+  
+  /* Loading y empty states */
+  .mobile-employee-popover [data-slot="command-empty"],
+  .mobile-employee-popover .flex.items-center.justify-center {
+    padding: 12px !important;
+    font-size: 12px !important;
+  }
+  
+  .mobile-employee-popover [data-slot="command-empty"] svg,
+  .mobile-employee-popover .flex.items-center.justify-center svg.lucide-user {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+/* Remove any hover effects in the modal container */
+.box-lunch-modal:hover {
+  border-color: var(--modal-border) !important; /* Mantener borde original */
+  box-shadow: var(--modal-shadow) !important; /* Mantener sombra original */
+  outline: none !important;
+}
+
+/* Decorative circle animation - inspired by dashboard cards */
+@keyframes decorative-circle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.18;
+  }
+}
+
+@keyframes decorative-circle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Main decorative circle in upper right corner of the modal */
+/* Estilo dashboard-card: bg-gradient-to-bl from-color/opacity to-transparent rounded-bl-full */
+/* THEME-AWARE: Use var(--primary) to adapt to the selected theme */
+.box-lunch-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(to bottom left, color-mix(in oklch, var(--primary) 12%, transparent), transparent 70%);
+  border-radius: 0 0 0 9999px; /* rounded-bl-full */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Secondary decorative circle - smaller with subtle animation */
+/* THEME-AWARE: Use var(--primary) to adapt to the selected theme */
+.box-lunch-modal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to bottom left, color-mix(in oklch, var(--primary) 8%, transparent), transparent 65%);
+  border-radius: 0 0 0 9999px; /* rounded-bl-full */
+  pointer-events: none;
+  z-index: 0;
+  animation: decorative-circle-pulse 5s ease-in-out infinite;
+}
+
+/* Modal Header with gradient background */
+.box-lunch-modal-header {
+  background: linear-gradient(180deg, var(--modal-header-gradient-start) 0%, var(--modal-header-gradient-end) 100%);
+  padding: 24px 24px 20px 24px;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid rgba(231, 214, 199, 0.45);
+}
+
+/* Decorative circles are now added directly in the header JSX
+   for greater control and consistency with the style of dashboard cards */
+
+/* Ensure content is above decorative elements */
+.box-lunch-modal > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Icon Circle with primary color background */
+/* THEME-AWARE: Use var(--primary) to adapt to the selected theme */
+.modal-icon-circle {
+  padding: 10px;
+  border-radius: 9999px;
+  background-color: color-mix(in oklch, var(--primary) 12%, var(--background));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* Close Button - Top Right - THEME-AWARE */
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background-color: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  /* Reset to remove default browser/framework styles */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.modal-close-btn:hover {
+  background-color: color-mix(in oklch, var(--primary) 10%, transparent);
+  color: var(--foreground);
+}
+
+/* Focus sutil y elegante - sin fondo */
+.modal-close-btn:focus,
+.modal-close-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: color-mix(in oklch, var(--primary) 8%, transparent);
+  color: var(--foreground);
+}
+
+.modal-close-btn:active {
+  transform: scale(0.95);
+  box-shadow: none !important;
+}
+
+/* Modal Labels */
+.modal-label {
+  color: var(--label-color) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Primary Button */
+.modal-btn-primary {
+  background-color: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+  border-radius: 10px !important;
+  padding: 10px 18px !important;
+  font-weight: 600 !important;
+  transition: all 0.15s ease !important;
+  border: none !important;
+}
+
+.modal-btn-primary:hover:not(:disabled) {
+  background-color: var(--btn-primary-hover) !important;
+}
+
+.modal-btn-primary:disabled {
+  opacity: 0.6 !important;
+}
+
+/* Secondary Button */
+.modal-btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid var(--btn-secondary-border) !important;
+  color: var(--btn-secondary-text) !important;
+  border-radius: 10px !important;
+  padding: 10px 18px !important;
+  transition: all 0.15s ease !important;
+}
+
+.modal-btn-secondary:hover {
+  background-color: var(--btn-secondary-hover-bg) !important;
+  border-color: var(--btn-secondary-border) !important;
+}
+
+/* ============================================
+   BOX LUNCH MODAL - DARK MODE SPECIFIC STYLES
+   ============================================ */
+
+/* Dark mode - Modal Container */
+.dark .box-lunch-modal {
+  background-color: var(--modal-bg) !important;
+  border-color: var(--modal-border) !important;
+}
+
+/* Dark mode - Decorative circles with adjusted opacity */
+/* THEME-AWARE: Use var(--primary) instead of fixed color */
+.dark .box-lunch-modal::before {
+  background: linear-gradient(to bottom left, color-mix(in oklch, var(--primary) 18%, transparent), transparent 70%) !important;
+}
+
+.dark .box-lunch-modal::after {
+  background: linear-gradient(to bottom left, color-mix(in oklch, var(--primary) 12%, transparent), transparent 65%) !important;
+}
+
+/* Dark mode - Modal Header */
+.dark .box-lunch-modal-header {
+  background: linear-gradient(180deg, var(--modal-header-gradient-start) 0%, var(--modal-header-gradient-end) 100%) !important;
+  border-bottom-color: color-mix(in oklch, var(--primary) 25%, var(--border)) !important;
+}
+
+/* Dark mode - Header title */
+.dark .box-lunch-modal-header .text-xl,
+.dark .box-lunch-modal-header .text-2xl {
+  color: var(--header-title-color) !important;
+}
+
+/* Dark mode - Icon circle */
+/* THEME-AWARE: Use var(--primary) instead of fixed color */
+.dark .modal-icon-circle {
+  background-color: color-mix(in oklch, var(--primary) 20%, var(--background)) !important;
+}
+
+/* Dark mode - Close button - THEME-AWARE */
+.dark .modal-close-btn {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .modal-close-btn:hover {
+  color: var(--foreground) !important;
+  background-color: color-mix(in oklch, var(--primary) 12%, var(--card)) !important;
+}
+
+.dark .modal-close-btn:focus,
+.dark .modal-close-btn:focus-visible {
+  color: var(--foreground) !important;
+  background-color: color-mix(in oklch, var(--primary) 12%, var(--card)) !important;
+}
+
+/* Dark mode - Form area */
+.dark .box-lunch-modal form {
+  background-color: transparent !important;
+}
+
+/* Dark mode - Bottom separator */
+.dark .box-lunch-modal [style*="border-top: 1px solid"] {
+  border-color: var(--separator-color) !important;
+}
+
+/* Dark mode - Decorative circles in header (JSX version) */
+.dark .box-lunch-modal-header > div[class*="absolute"][class*="rounded-bl-full"] {
+  opacity: 0.15 !important;
+}
+
+/* Dark mode - Employee dropdown popover */
+.dark .box-lunch-modal [data-radix-popper-content-wrapper] > div {
+  background-color: var(--dropdown-bg) !important;
+  border-color: var(--dropdown-border) !important;
+}
+
+/* Dark mode - Search input area in employee dropdown */
+.dark .box-lunch-modal .border-\[\#E9DDD3\] {
+  border-color: var(--separator-color) !important;
+}
+
+/* ============================================
+   BOX LUNCH MODAL - THEMED ELEMENTS
+   ============================================ */
+
+/* Modal title - uses CSS variable for color */
+.modal-title {
+  color: var(--header-title-color) !important;
+}
+
+/* Modal icon - theme primary accent */
+/* THEME-AWARE: Use var(--primary) to suit the theme */
+.modal-icon {
+  color: var(--primary) !important;
+}
+
+/* Modal separator line */
+.modal-separator {
+  border-top: 1px solid var(--separator-color) !important;
+}
+
+/* Employee popover container */
+.employee-popover {
+  background-color: var(--dropdown-bg) !important;
+  border: 1px solid var(--dropdown-border) !important;
+}
+
+/* Employee search zone */
+.employee-search-zone {
+  background-color: var(--dropdown-bg) !important;
+  border-bottom: 1px solid var(--separator-color) !important;
+}
+
+/* Employee Dropdown Container */
+.employee-dropdown {
+  background-color: var(--dropdown-bg) !important;
+  border: 1px solid var(--dropdown-border) !important;
+  border-radius: var(--dropdown-radius) !important;
+  box-shadow: var(--dropdown-shadow) !important;
+}
+
+/* Fix: Enable mouse wheel scroll in CommandList */
+.employee-dropdown [data-slot="command-list"],
+.employee-dropdown [cmdk-list] {
+  max-height: 15rem !important; /* max-h-60 = 240px */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  pointer-events: auto !important;
+  scroll-behavior: smooth !important;
+  padding-right: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Ensure that command items do not block scrolling */
+.employee-dropdown [data-slot="command-item"],
+.employee-dropdown [cmdk-item] {
+  pointer-events: auto !important;
+}
+
+/* Ensure that the command group does not block scrolling */
+.employee-dropdown [data-slot="command-group"],
+.employee-dropdown [cmdk-group] {
+  pointer-events: auto !important;
+}
+
+/* Wider scrollbar for employee dropdown */
+.employee-dropdown [data-slot="command-list"]::-webkit-scrollbar,
+.employee-dropdown [cmdk-list]::-webkit-scrollbar {
+  width: 14px !important;
+  background: transparent !important;
+}
+
+.employee-dropdown [data-slot="command-list"]::-webkit-scrollbar-track,
+.employee-dropdown [cmdk-list]::-webkit-scrollbar-track {
+  background: var(--muted) !important;
+  border-radius: 7px !important;
+  margin: 4px 0 !important;
+}
+
+.employee-dropdown [data-slot="command-list"]::-webkit-scrollbar-thumb,
+.employee-dropdown [cmdk-list]::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--primary) 40%, var(--muted)) !important;
+  border-radius: 7px !important;
+  border: 3px solid var(--muted) !important;
+  min-height: 40px !important;
+}
+
+.employee-dropdown [data-slot="command-list"]::-webkit-scrollbar-thumb:hover,
+.employee-dropdown [cmdk-list]::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 55%, var(--muted)) !important;
+  cursor: pointer !important;
+}
+
+.employee-dropdown [data-slot="command-list"]::-webkit-scrollbar-thumb:active,
+.employee-dropdown [cmdk-list]::-webkit-scrollbar-thumb:active {
+  background: color-mix(in oklch, var(--primary) 70%, var(--muted)) !important;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  padding: var(--item-padding) !important;
+  border-radius: var(--item-radius) !important;
+  color: var(--item-text) !important;
+  transition: all 0.15s ease !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--item-hover-bg) !important;
+}
+
+.dropdown-item[data-selected="true"] {
+  background-color: var(--item-selected-bg) !important;
+  color: var(--item-selected-text) !important;
+}
+
+/* Previously selected item (checked) */
+.dropdown-item-checked {
+  background-color: var(--item-checked-bg) !important;
+  color: var(--item-checked-text) !important;
+}
+
+/* User Avatar in dropdown */
+.dropdown-item .user-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+}
+
+/* Command Item (employee selector) hover states */
+[data-slot="command-item"][data-selected="true"] {
+  background-color: var(--item-selected-bg) !important;
+  color: var(--item-selected-text) !important;
+}
+
+[data-slot="command-item"][data-selected="true"] span {
+  color: var(--item-selected-text) !important;
+}
+
+[data-slot="command-item"][data-selected="true"] svg {
+  color: var(--item-selected-text) !important;
+}
+
+/* ===========================================
+   FOCUS STYLES - CONSISTENT SYSTEM
+   Subtle and elegant focus for all elements
+   =========================================== */
+
+/* Reset focus for buttons within the modal */
+.box-lunch-modal button:focus,
+.box-lunch-modal button:focus-visible {
+  outline: none !important;
+}
+
+/* Subtle focus for generic buttons in the modal */
+/* THEME-AWARE: Use var(--primary) to suit the theme */
+.box-lunch-modal button:not(.modal-close-btn):not(.form-input-trigger):not(.modal-btn-primary):not(.modal-btn-secondary):focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+}
+
+/* Primary button - subtle focus */
+/* THEME-AWARE: Usa var(--primary) */
+.modal-btn-primary:focus,
+.modal-btn-primary:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 18%, transparent) !important;
+}
+
+/* Secondary button - subtle focus */
+/* THEME-AWARE: Usa var(--primary) */
+.modal-btn-secondary:focus,
+.modal-btn-secondary:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 18%, transparent) !important;
+}
+
+/* Radix Dialog close button (X native to shadcn) - remove invasive styles */
+/* THEME-AWARE: Usa var(--primary) */
+[data-radix-dialog-close]:focus,
+[data-radix-dialog-close]:focus-visible,
+.box-lunch-modal [data-radix-dialog-close]:focus,
+.box-lunch-modal [data-radix-dialog-close]:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+  ring-color: transparent !important;
+}
+
+/* Complete reset of the Tailwind/shadcn ring in the modal */
+.box-lunch-modal *:focus {
+  --tw-ring-color: transparent !important;
+  --tw-ring-offset-color: transparent !important;
+}
+
+/* Dark mode focus styles */
+/* THEME-AWARE: Usa var(--primary) */
+.dark .modal-close-btn:focus,
+.dark .modal-close-btn:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+  background-color: color-mix(in oklch, var(--primary) 10%, var(--background)) !important;
+}
+
+.dark .modal-btn-primary:focus,
+.dark .modal-btn-primary:focus-visible,
+.dark .modal-btn-secondary:focus,
+.dark .modal-btn-secondary:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+/* ===========================================
+   EMPLOYEE SEARCH - SELECT DROPDOWN
+   THEME-AWARE: Use var(--primary) to suit the theme
+   =========================================== */
+
+/* Search input - SECONDARY, low visual profile - THEME-AWARE */
+.search-input-neutral {
+  background-color: var(--input) !important; /* Use theme variable */
+  border: 1px solid var(--border) !important; /* Theme border */
+  color: var(--foreground) !important; /* Theme text */
+  border-radius: 0.5rem !important; /* rounded-lg */
+  transition: border-color 150ms ease-out, background-color 150ms ease-out, box-shadow 150ms ease-out !important;
+}
+
+/* Hover - Subtle tint of the theme's primary color */
+.search-input-neutral:hover:not(:focus):not(:focus-visible) {
+  background-color: color-mix(in oklch, var(--primary) 3%, var(--card)) !important;
+  border-color: color-mix(in oklch, var(--primary) 15%, var(--border)) !important;
+}
+
+/* Focus - border with primary theme color, subtle glow */
+.search-input-neutral:focus,
+.search-input-neutral:focus-visible {
+  outline: none !important;
+  background-color: var(--card) !important;
+  border-color: color-mix(in oklch, var(--primary) 50%, var(--border)) !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 12%, transparent) !important;
+}
+
+.search-input-neutral::placeholder {
+  color: var(--muted-foreground) !important;
+  transition: color 150ms ease-out !important;
+}
+
+/* Placeholder - subtle change in hover */
+.search-input-neutral:hover:not(:focus)::placeholder {
+  color: color-mix(in oklch, var(--foreground) 50%, var(--muted-foreground)) !important;
+}
+
+/* Dark mode for search input - THEME-AWARE */
+.dark .search-input-neutral {
+  background-color: var(--input) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+
+.dark .search-input-neutral:hover:not(:focus):not(:focus-visible) {
+  background-color: color-mix(in oklch, var(--primary) 5%, var(--card)) !important;
+  border-color: color-mix(in oklch, var(--primary) 20%, var(--border)) !important;
+}
+
+.dark .search-input-neutral:focus,
+.dark .search-input-neutral:focus-visible {
+  background-color: var(--card) !important;
+  border-color: color-mix(in oklch, var(--primary) 60%, var(--border)) !important;
+  color: var(--foreground) !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+}
+
+.dark .search-input-neutral::placeholder {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .search-input-neutral:hover:not(:focus)::placeholder {
+  color: color-mix(in oklch, var(--foreground) 55%, var(--muted-foreground)) !important;
+}
+
+/* Search icon - smooth transition - THEME-AWARE */
+.search-input-neutral ~ svg,
+.search-input-neutral + svg,
+.search-input-neutral-icon {
+  transition: color 150ms ease-out !important;
+}
+
+/* Search container with hover icon */
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input-wrapper .search-icon {
+  color: var(--muted-foreground) !important;
+  transition: color 150ms ease-out !important;
+}
+
+/* Hover on input affects icon - primary color tint */
+.search-input-wrapper:has(.search-input-neutral:hover:not(:focus)) .search-icon {
+  color: color-mix(in oklch, var(--primary) 40%, var(--muted-foreground)) !important;
+}
+
+/* Focus on input affects icon - primary color more visible */
+.search-input-wrapper:has(.search-input-neutral:focus) .search-icon,
+.search-input-wrapper:has(.search-input-neutral:focus-visible) .search-icon {
+  color: color-mix(in oklch, var(--primary) 70%, var(--muted-foreground)) !important;
+}
+
+/* Dark mode for search icon - THEME-AWARE */
+.dark .search-input-wrapper .search-icon {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .search-input-wrapper:has(.search-input-neutral:hover:not(:focus)) .search-icon {
+  color: color-mix(in oklch, var(--primary) 45%, var(--muted-foreground)) !important;
+}
+
+.dark .search-input-wrapper:has(.search-input-neutral:focus) .search-icon,
+.dark .search-input-wrapper:has(.search-input-neutral:focus-visible) .search-icon {
+  color: color-mix(in oklch, var(--primary) 75%, var(--muted-foreground)) !important;
+}
+
+/* ===========================================
+   EMPLOYEE COMMAND ITEM - SELECTION STYLES
+   Styles for the employee selector (Command)
+   =========================================== */
+
+/* CommandItem - default state */
+[cmdk-item] {
+  transition: all 0.15s ease !important;
+  border-radius: var(--item-radius) !important;
+}
+
+/* CommandItem - hover */
+[cmdk-item]:hover:not([data-selected="true"]):not([aria-selected="true"]) {
+  background-color: var(--item-hover-bg) !important; /* #FFF3E8 */
+  transform: translateX(1px);
+}
+
+/* CommandItem - item already selected/checked (the one with the check visible) */
+[cmdk-item][data-employee-selected="true"] {
+  background-color: var(--item-checked-bg) !important; /* #FFF4EC - fondo naranja claro */
+}
+
+/* Main text of the selected employee */
+[cmdk-item][data-employee-selected="true"] .font-medium {
+  font-weight: 500 !important;
+  color: var(--foreground) !important;
+}
+
+/* Secondary text (email) of the selected employee */
+[cmdk-item][data-employee-selected="true"] .text-muted-foreground {
+  color: var(--muted-foreground) !important;
+}
+
+/* Check icon on selected employee - primary theme */
+[cmdk-item][data-employee-selected="true"] svg.lucide-check {
+  color: var(--primary) !important;
+}
+
+/* Selected employee avatar - subtle elevation */
+[cmdk-item][data-employee-selected="true"] [data-slot="avatar"] {
+  box-shadow: 0 1px 3px color-mix(in oklch, var(--primary) 15%, transparent);
+}
+
+/* Keep avatar initials blank within selection background */
+[cmdk-item][data-employee-selected="true"] [data-slot="avatar-fallback"] {
+  color: var(--primary-foreground) !important;
+}
+
+/* CommandItem - keyboard navigation (aria-selected) */
+[cmdk-item][aria-selected="true"] {
+  background-color: var(--item-selected-bg) !important; /* #E05A00 */
+  color: var(--item-selected-text) !important; /* #FFFFFF */
+}
+
+[cmdk-item][aria-selected="true"] .font-medium,
+[cmdk-item][aria-selected="true"] .text-muted-foreground,
+[cmdk-item][aria-selected="true"] span {
+  color: var(--item-selected-text) !important;
+}
+
+[cmdk-item][aria-selected="true"] svg {
+  color: var(--item-selected-text) !important;
+}
+
+/* Dark mode - CommandItem seleccionado - THEME-AWARE */
+.dark [cmdk-item][data-employee-selected="true"] {
+  background-color: color-mix(in oklch, var(--primary) 15%, var(--card)) !important;
+}
+
+.dark [cmdk-item][data-employee-selected="true"] .font-medium {
+  color: var(--foreground) !important;
+}
+
+.dark [cmdk-item][data-employee-selected="true"] .text-muted-foreground {
+  color: var(--muted-foreground) !important;
+}
+
+.dark [cmdk-item][data-employee-selected="true"] svg.lucide-check {
+  color: var(--primary) !important;
+}
+
+/* ===========================================
+   "NEW REQUEST" BUTTON - THEME-AWARE
+   Use var(--primary) to fit the theme
+   =========================================== */
+
+/* New Request Button - DEFAULT Status */
+.nueva-solicitud-btn {
+  /* Gradient using primary theme color */
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 85%, black) 100%
+  ) !important;
+  color: var(--primary-foreground) !important;
+  border: 1px solid color-mix(in oklch, var(--primary) 30%, transparent) !important;
+  border-radius: 12px !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: 0.01em !important;
+  
+  /* Soft shadow with primary color glow */
+  box-shadow:
+    0 2px 8px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 4px 16px color-mix(in oklch, var(--primary) 15%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 10%, transparent) !important;
+  
+  /* Transiciones suaves */
+  transition:
+    background 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    transform 0.2s ease-out,
+    border-color 0.2s ease-out !important;
+  
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Subtle inner glow effect */
+.nueva-solicitud-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.12) 0%,
+    oklch(1 0 0 / 0) 100%
+  );
+  pointer-events: none;
+  border-radius: 11px 11px 0 0;
+}
+
+/* HOVER Status - Brighter Glow */
+.nueva-solicitud-btn:hover {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--primary) 100%, white 8%) 0%,
+    var(--primary) 100%
+  ) !important;
+  border-color: color-mix(in oklch, var(--primary) 40%, transparent) !important;
+  
+  /* More pronounced outer glow */
+  box-shadow:
+    0 4px 12px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 8px 24px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 0 20px color-mix(in oklch, var(--primary) 20%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+  
+  transform: translateY(-1px) !important;
+}
+
+/* ACTIVE/PRESSED status - Pressure effect */
+.nueva-solicitud-btn:active {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--primary) 90%, black) 0%,
+    color-mix(in oklch, var(--primary) 80%, black) 100%
+  ) !important;
+  
+  box-shadow:
+    0 1px 4px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 2px 8px color-mix(in oklch, var(--primary) 20%, transparent),
+    inset 0 1px 2px oklch(0 0 0 / 0.1) !important;
+  
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* FOCUS Status - Accessible focus ring */
+.nueva-solicitud-btn:focus,
+.nueva-solicitud-btn:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 2px 8px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 4px 16px color-mix(in oklch, var(--primary) 15%, transparent),
+    0 0 0 3px color-mix(in oklch, var(--primary) 35%, transparent) !important;
+}
+
+/* Button icon - smooth transition */
+.nueva-solicitud-btn svg {
+  transition: transform 0.2s ease-out !important;
+}
+
+/* Icon rotation ONLY for main button (out of modals) */
+/* Do not apply to .modal-btn-primary to maintain visual stability */
+.nueva-solicitud-btn:not(.modal-btn-primary):hover svg {
+  transform: rotate(90deg) !important;
+}
+
+/* Modal btn primary - icon should remain stable */
+.modal-btn-primary svg,
+.modal-btn-primary:hover svg,
+.modal-btn-primary:focus svg,
+.modal-btn-primary:active svg {
+  transform: none !important;
+}
+
+/* ===========================================
+   "NEW REQUEST" BUTTON - DARK MODE
+   =========================================== */
+
+.dark .nueva-solicitud-btn {
+  /* Force white text and icon for better contrast */
+  color: oklch(1 0 0) !important;
+  
+  /* The gradient uses var(--primary) which already changes in dark mode */
+  /* We only adjust intensities for better visibility */
+  box-shadow:
+    0 2px 10px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 4px 20px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 15%, transparent),
+    inset 0 1px 0 oklch(1 0 0 / 0.08) !important;
+}
+
+/* Blank SVG icon for dark mode */
+.dark .nueva-solicitud-btn svg {
+  color: oklch(1 0 0) !important;
+  stroke: currentColor !important;
+}
+
+.dark .nueva-solicitud-btn::before {
+  background: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.15) 0%,
+    oklch(1 0 0 / 0) 100%
+  );
+}
+
+.dark .nueva-solicitud-btn:hover {
+  box-shadow:
+    0 4px 16px color-mix(in oklch, var(--primary) 45%, transparent),
+    0 8px 32px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 0 28px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 20%, transparent) !important;
+}
+
+.dark .nueva-solicitud-btn:active {
+  box-shadow:
+    0 1px 6px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 2px 10px color-mix(in oklch, var(--primary) 25%, transparent),
+    inset 0 2px 4px oklch(0 0 0 / 0.15) !important;
+}
+
+.dark .nueva-solicitud-btn:focus,
+.dark .nueva-solicitud-btn:focus-visible {
+  box-shadow:
+    0 2px 10px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 4px 20px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 0 0 3px color-mix(in oklch, var(--primary) 40%, transparent) !important;
+}
+
+/* ===========================================
+   EMPLOYEE LIST - macOS STYLE SCROLLBAR
+   =========================================== */
+
+/* Employee list - modern macOS style scroll with warm palette */
+.employee-list-scroll {
+  scrollbar-width: thin !important;
+  scrollbar-color: #EADFD7 transparent !important;
+  padding-right: 8px !important;
+}
+
+/* Webkit scrollbar - ancho delgado 6px estilo macOS */
+.employee-list-scroll::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+/* Track - completamente transparente */
+.employee-list-scroll::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 9999px !important;
+}
+
+/* Thumb - warm gray (#EADFD7), fully rounded */
+.employee-list-scroll::-webkit-scrollbar-thumb {
+  background-color: #EADFD7 !important;
+  border-radius: 9999px !important;
+  transition: background-color 0.15s ease !important;
+}
+
+/* Hover - darker warm gray (#E0CFC3) */
+div.employee-list-scroll::-webkit-scrollbar-thumb:hover,
+.employee-list-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #E0CFC3 !important;
+}
+
+/* Active - terracota suave (#D6B8A7) */
+div.employee-list-scroll::-webkit-scrollbar-thumb:active,
+.employee-list-scroll::-webkit-scrollbar-thumb:active {
+  background-color: #D6B8A7 !important;
+}
+
+/* Dark mode - keep warm tones adapted */
+.dark .employee-list-scroll {
+  scrollbar-color: #5C524A transparent !important;
+}
+
+.dark .employee-list-scroll::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.dark .employee-list-scroll::-webkit-scrollbar-thumb {
+  background: #5C524A !important;
+}
+
+.dark .employee-list-scroll::-webkit-scrollbar-thumb:hover {
+  background: #6E635A !important;
+}
+
+.dark .employee-list-scroll::-webkit-scrollbar-thumb:active {
+  background: #80746A !important;
+}
+
+/* ============================================
+   EMPLOYEE SELECTOR - SELECTION ANIMATIONS
+   Microinteracciones sutiles y elegantes
+   ============================================ */
+
+/* Animation of the check mark when it appears */
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-4px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Dropdown item - smooth transitions for hover and selection */
+[data-slot="select-item"] {
+  transition: 
+    background-color 150ms ease-out,
+    color 120ms ease-out,
+    transform 120ms ease-out !important;
+}
+
+/* Smooth hover on items */
+[data-slot="select-item"]:hover:not([data-highlighted]):not([data-state="checked"]) {
+  transform: translateX(1px);
+}
+
+/* Check icon container - always present but invisible until selection */
+[data-slot="select-item-indicator"] {
+  transition: opacity 150ms ease-out, transform 150ms ease-out !important;
+}
+
+/* Check icon animation cuando aparece */
+[data-slot="select-item"][data-state="checked"] [data-slot="select-item-indicator"],
+[data-slot="select-item"][data-state="checked"] svg:first-child {
+  animation: checkmark-appear 150ms ease-out forwards;
+}
+
+/* Background transition when selecting (checked state) */
+[data-slot="select-item"][data-state="checked"] {
+  transition: 
+    background-color 160ms ease-out,
+    color 120ms ease-out !important;
+}
+
+/* Item internals - synchronized transitions */
+[data-slot="select-item"] span,
+[data-slot="select-item"] .text-muted-foreground {
+  transition: color 120ms ease-out !important;
+}
+
+/* Avatar container in items - border/shadow transition */
+[data-slot="select-item"] [data-slot="avatar"],
+[data-slot="select-item"] [data-slot="avatar-fallback"] {
+  transition: box-shadow 150ms ease-out, border-color 150ms ease-out !important;
+}
+
+/* Subtle avatar elevation upon selection */
+[data-slot="select-item"][data-state="checked"] [data-slot="avatar"] {
+  box-shadow: 0 1px 3px rgba(230, 92, 0, 0.15);
+}
+
+/* ============================================
+   SELECT TRIGGER - CONTENT UPDATE ANIMATION
+   ============================================ */
+
+/* SelectTrigger - smooth transition when updating content */
+.form-input-trigger [data-slot="select-value"],
+[data-slot="select-trigger"] [data-slot="select-value"] {
+  transition: opacity 140ms ease-out !important;
+}
+
+/* Avatar inside the trigger - smooth transition */
+.form-input-trigger [data-slot="avatar"],
+.form-input-trigger img {
+  transition: opacity 160ms ease-out, transform 160ms ease-out !important;
+}
+
+/* Text inside the trigger - smooth fade */
+.form-input-trigger .font-medium,
+.form-input-trigger .text-muted-foreground {
+  transition: opacity 140ms ease-out !important;
+}
+
+/* ============================================
+   SELECT CONTENT - OPEN/CLOSE ANIMATIONS
+   ============================================ */
+
+/* Dropdown entry animation */
+@keyframes dropdown-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Dropdown exit animation */
+@keyframes dropdown-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-3px) scale(0.98);
+  }
+}
+
+/* SelectContent - opening/closing animations */
+[data-slot="select-content"][data-state="open"] {
+  animation: dropdown-enter 160ms ease-out forwards;
+}
+
+[data-slot="select-content"][data-state="closed"] {
+  animation: dropdown-exit 120ms ease-out forwards;
+}
+
+/* Override for Radix animations if they exist */
+[data-slot="select-content"] {
+  --radix-select-content-transform-origin: var(--radix-select-content-transform-origin, top center);
+}
+
+/* Ensure smooth closing */
+[data-slot="select-content"][data-side="bottom"][data-state="closed"],
+[data-slot="select-content"][data-side="top"][data-state="closed"] {
+  animation: dropdown-exit 120ms ease-out forwards;
+}
+
+/* ===========================================
+   BUTTON SYSTEM - UNIFIED STYLES
+   Elegant and consistent design for the entire app
+   =========================================== */
+
+/* ===========================================
+   ELEGANT OUTLINE BUTTON (Today, Close, Export)
+   =========================================== */
+
+.elegant-outline-btn {
+  /* Transparent background with theme tint */
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 2%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 4%, transparent) 100%
+  ) !important;
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, var(--border)) !important;
+  color: var(--foreground) !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.01em !important;
+  
+  /* Transiciones suaves */
+  transition:
+    background 0.2s ease-out,
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    transform 0.15s ease-out,
+    color 0.15s ease-out !important;
+  
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Hover - Glow with theme color */
+.elegant-outline-btn:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 8%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 12%, transparent) 100%
+  ) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  box-shadow:
+    0 2px 8px color-mix(in oklch, var(--primary) 18%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 10%, transparent) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Active - Presionado */
+.elegant-outline-btn:active {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 12%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 16%, transparent) 100%
+  ) !important;
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow:
+    0 1px 3px color-mix(in oklch, var(--primary) 12%, transparent),
+    inset 0 1px 2px color-mix(in oklch, var(--primary) 5%, transparent) !important;
+}
+
+/* Focus - Accessibility Ring */
+.elegant-outline-btn:focus,
+.elegant-outline-btn:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 2px 6px color-mix(in oklch, var(--primary) 15%, transparent) !important;
+}
+
+/* Icons inside the button */
+.elegant-outline-btn svg {
+  transition: color 0.15s ease-out, transform 0.2s ease-out !important;
+}
+
+.elegant-outline-btn:hover svg {
+  color: var(--primary) !important;
+}
+
+/* Dark mode - Elegant Outline Button */
+.dark .elegant-outline-btn {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 5%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 8%, transparent) 100%
+  ) !important;
+  border-color: color-mix(in oklch, var(--primary) 30%, var(--border)) !important;
+  color: var(--foreground) !important;
+}
+
+.dark .elegant-outline-btn:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 12%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 18%, transparent) 100%
+  ) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  box-shadow:
+    0 2px 10px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 12%, transparent) !important;
+}
+
+.dark .elegant-outline-btn:active {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 15%, transparent) 0%,
+    color-mix(in oklch, var(--primary) 20%, transparent) 100%
+  ) !important;
+}
+
+.dark .elegant-outline-btn:focus,
+.dark .elegant-outline-btn:focus-visible {
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 2px 8px color-mix(in oklch, var(--primary) 20%, transparent) !important;
+}
+
+.dark .elegant-outline-btn:hover svg {
+  color: var(--primary) !important;
+}
+
+/* ===========================================
+   SUCCESS BUTTON - Positive Action
+   =========================================== */
+
+.success-action-btn {
+  /* Gradiente verde vibrante */
+  background: linear-gradient(
+    135deg,
+    oklch(0.68 0.16 145) 0%,
+    oklch(0.60 0.15 150) 100%
+  ) !important;
+  color: #ffffff !important;
+  border: 1px solid oklch(0.55 0.14 148 / 0.3) !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.01em !important;
+  
+  /* Shadow with green glow */
+  box-shadow:
+    0 2px 8px oklch(0.60 0.15 145 / 0.25),
+    0 4px 14px oklch(0.55 0.14 148 / 0.15),
+    0 0 0 1px oklch(0.70 0.12 145 / 0.1) !important;
+  
+  transition:
+    background 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    transform 0.2s ease-out,
+    border-color 0.2s ease-out !important;
+  
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Subtle inner glow effect */
+.success-action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.15) 0%,
+    oklch(1 0 0 / 0) 100%
+  );
+  pointer-events: none;
+  border-radius: 9px 9px 0 0;
+}
+
+/* Hover - Brighter glow */
+.success-action-btn:hover {
+  background: linear-gradient(
+    135deg,
+    oklch(0.72 0.17 145) 0%,
+    oklch(0.64 0.16 148) 100%
+  ) !important;
+  border-color: oklch(0.58 0.15 145 / 0.4) !important;
+  
+  box-shadow:
+    0 4px 12px oklch(0.60 0.16 145 / 0.35),
+    0 8px 24px oklch(0.55 0.15 148 / 0.25),
+    0 0 20px oklch(0.65 0.14 145 / 0.20),
+    0 0 0 1px oklch(0.72 0.12 145 / 0.15) !important;
+  
+  transform: translateY(-1px) !important;
+}
+
+/* Active/Pressed */
+.success-action-btn:active {
+  background: linear-gradient(
+    135deg,
+    oklch(0.58 0.15 145) 0%,
+    oklch(0.52 0.14 148) 100%
+  ) !important;
+  
+  box-shadow:
+    0 1px 4px oklch(0.55 0.14 145 / 0.30),
+    0 2px 8px oklch(0.50 0.13 148 / 0.20),
+    inset 0 1px 2px oklch(0 0 0 / 0.1) !important;
+  
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Focus */
+.success-action-btn:focus,
+.success-action-btn:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 2px 8px oklch(0.60 0.15 145 / 0.25),
+    0 4px 14px oklch(0.55 0.14 148 / 0.15),
+    0 0 0 3px oklch(0.65 0.16 145 / 0.35) !important;
+}
+
+/* Disabled */
+.success-action-btn:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow:
+    0 1px 4px oklch(0.60 0.10 145 / 0.15) !important;
+}
+
+/* button icon */
+.success-action-btn svg {
+  transition: transform 0.2s ease-out !important;
+}
+
+.success-action-btn:hover svg {
+  transform: scale(1.1) !important;
+}
+
+/* Dark mode - Success Button */
+.dark .success-action-btn {
+  background: linear-gradient(
+    135deg,
+    oklch(0.65 0.15 145) 0%,
+    oklch(0.58 0.14 150) 100%
+  ) !important;
+  border-color: oklch(0.52 0.12 148 / 0.4) !important;
+  
+  box-shadow:
+    0 2px 10px oklch(0.62 0.16 145 / 0.35),
+    0 4px 18px oklch(0.55 0.14 148 / 0.25),
+    inset 0 1px 0 oklch(1 0 0 / 0.08) !important;
+}
+
+.dark .success-action-btn:hover {
+  background: linear-gradient(
+    135deg,
+    oklch(0.70 0.16 145) 0%,
+    oklch(0.62 0.15 148) 100%
+  ) !important;
+  
+  box-shadow:
+    0 4px 16px oklch(0.65 0.17 145 / 0.45),
+    0 8px 32px oklch(0.58 0.15 148 / 0.35),
+    0 0 28px oklch(0.68 0.16 145 / 0.25) !important;
+}
+
+/* ===========================================
+   NAVIGATION BUTTONS (Arrows)
+   Use var(--primary) to fit the theme
+   =========================================== */
+
+.nav-arrow-btn {
+  background: transparent !important;
+  border: none !important;
+  color: var(--muted-foreground) !important;
+  border-radius: 8px !important;
+  
+  transition:
+    background 0.15s ease-out,
+    color 0.15s ease-out,
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out !important;
+}
+
+.nav-arrow-btn:hover {
+  background: color-mix(in oklch, var(--primary) 12%, transparent) !important;
+  color: var(--primary) !important;
+  transform: scale(1.08) !important;
+}
+
+.nav-arrow-btn:active {
+  background: color-mix(in oklch, var(--primary) 18%, transparent) !important;
+  transform: scale(0.95) !important;
+}
+
+.nav-arrow-btn:focus,
+.nav-arrow-btn:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+/* Dark mode - Nav Arrow */
+.dark .nav-arrow-btn {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .nav-arrow-btn:hover {
+  background: color-mix(in oklch, var(--primary) 18%, transparent) !important;
+  color: var(--primary) !important;
+}
+
+.dark .nav-arrow-btn:active {
+  background: color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+/* ===========================================
+   MENU BUTTON (Three dots) - THEME-AWARE
+   Use var(--primary) to fit the theme
+   =========================================== */
+
+.menu-trigger-btn {
+  background: transparent !important;
+  border: none !important;
+  color: var(--muted-foreground) !important;
+  border-radius: 8px !important;
+  
+  transition:
+    background 0.15s ease-out,
+    color 0.15s ease-out,
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out !important;
+}
+
+.menu-trigger-btn:hover {
+  background: color-mix(in oklch, var(--primary) 12%, transparent) !important;
+  color: var(--primary) !important;
+}
+
+/* Active state when menu is open */
+.menu-trigger-btn[data-state="open"] {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 85%, black) 100%
+  ) !important;
+  color: var(--primary-foreground) !important;
+  box-shadow:
+    0 2px 6px color-mix(in oklch, var(--primary) 25%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 10%, transparent) !important;
+}
+
+.menu-trigger-btn:focus,
+.menu-trigger-btn:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+/* Dark mode - Menu Trigger */
+.dark .menu-trigger-btn {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .menu-trigger-btn:hover {
+  background: color-mix(in oklch, var(--primary) 18%, transparent) !important;
+  color: var(--primary) !important;
+}
+
+.dark .menu-trigger-btn[data-state="open"] {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 80%, black) 100%
+  ) !important;
+  color: var(--primary-foreground) !important;
+  box-shadow:
+    0 2px 8px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--primary) 12%, transparent) !important;
+}
+
+/* ===========================================
+   EXPORT BUTTON - Special Accent
+   =========================================== */
+
+.export-btn {
+  /* Inherits from elegant-outline but with a more distinctive accent */
+  background: linear-gradient(
+    180deg,
+    oklch(0.98 0.015 55 / 0.5) 0%,
+    oklch(0.96 0.02 52 / 0.6) 100%
+  ) !important;
+  border: 1px solid oklch(0.78 0.04 55) !important;
+  color: oklch(0.40 0.04 48) !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.02em !important;
+  
+  transition:
+    background 0.2s ease-out,
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    transform 0.15s ease-out,
+    color 0.15s ease-out !important;
+}
+
+.export-btn:hover {
+  background: linear-gradient(
+    180deg,
+    oklch(0.95 0.03 52 / 0.7) 0%,
+    oklch(0.92 0.035 50 / 0.8) 100%
+  ) !important;
+  border-color: oklch(0.68 0.12 48) !important;
+  color: oklch(0.42 0.10 45) !important;
+  box-shadow:
+    0 2px 10px oklch(0.65 0.12 50 / 0.15),
+    0 0 0 1px oklch(0.72 0.10 52 / 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+
+.export-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.export-btn:focus,
+.export-btn:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 0 0 3px oklch(0.68 0.12 50 / 0.22) !important;
+}
+
+/* Dark mode - Export Button */
+.dark .export-btn {
+  background: linear-gradient(
+    180deg,
+    oklch(0.28 0.025 48 / 0.5) 0%,
+    oklch(0.26 0.03 50 / 0.6) 100%
+  ) !important;
+  border-color: oklch(0.48 0.03 50) !important;
+  color: oklch(0.85 0.015 55) !important;
+}
+
+.dark .export-btn:hover {
+  background: linear-gradient(
+    180deg,
+    oklch(0.32 0.035 50 / 0.7) 0%,
+    oklch(0.30 0.04 48 / 0.8) 100%
+  ) !important;
+  border-color: oklch(0.58 0.10 50) !important;
+  color: oklch(0.92 0.02 55) !important;
+  box-shadow:
+    0 2px 12px oklch(0.62 0.12 50 / 0.22),
+    0 0 0 1px oklch(0.55 0.08 52 / 0.1) !important;
+}
+
+
+
+/* ===========================================
+   THEME COLOR PALETTES
+   Customizable color system
+   Default: Orange (no class needed)
+   =========================================== */
+
+/* ============================================
+   BLUE THEME
+   ============================================ */
+:root.theme-blue {
+  /* Primary blue */
+  --primary: oklch(0.55 0.22 260);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.22 260);
+  
+  /* Accent - lighter blue */
+  --accent: oklch(0.65 0.18 245);
+  --accent-foreground: oklch(1 0 0);
+  
+  /* Charts */
+  --chart-1: oklch(0.55 0.22 260);
+  --chart-2: oklch(0.65 0.18 245);
+  
+  /* Sidebar */
+  --sidebar-primary: oklch(0.55 0.22 260);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.22 260);
+  
+  /* Blue-tinted backgrounds */
+  --background: oklch(0.98 0.008 250);
+  --card: oklch(0.995 0.006 255);
+  --popover: oklch(0.995 0.004 250);
+  --secondary: oklch(0.95 0.02 255);
+  --muted: oklch(0.94 0.012 250);
+  --border: oklch(0.88 0.015 255);
+  --input: oklch(0.92 0.012 250);
+  --skeleton: oklch(0.92 0.015 255);
+  --sidebar: oklch(0.96 0.01 252);
+  --sidebar-accent: oklch(0.92 0.025 255);
+}
+
+.dark.theme-blue,
+.theme-blue.dark {
+  --primary: oklch(0.55 0.20 260);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.20 260);
+  
+  --accent: oklch(0.62 0.15 250);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.65 0.20 260);
+  --chart-2: oklch(0.72 0.15 250);
+  
+  --sidebar-primary: oklch(0.55 0.20 260);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.20 260);
+  
+  /* Dark blue-tinted backgrounds */
+  --background: oklch(0.18 0.02 255);
+  --card: oklch(0.22 0.025 258);
+  --popover: oklch(0.22 0.025 258);
+  --secondary: oklch(0.28 0.025 255);
+  --muted: oklch(0.28 0.02 250);
+  --border: oklch(0.35 0.018 255);
+  --input: oklch(0.30 0.018 252);
+  --skeleton: oklch(0.28 0.02 255);
+  --sidebar: oklch(0.20 0.022 256);
+  --sidebar-accent: oklch(0.28 0.025 258);
+}
+
+/* ============================================
+   TEAL THEME
+   ============================================ */
+:root.theme-teal {
+  --primary: oklch(0.60 0.15 175);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.60 0.15 175);
+  
+  --accent: oklch(0.68 0.12 165);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.60 0.15 175);
+  --chart-2: oklch(0.68 0.12 165);
+  
+  --sidebar-primary: oklch(0.60 0.15 175);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.60 0.15 175);
+  
+  /* Teal-tinted backgrounds */
+  --background: oklch(0.98 0.008 175);
+  --card: oklch(0.995 0.006 180);
+  --popover: oklch(0.995 0.004 175);
+  --secondary: oklch(0.95 0.02 178);
+  --muted: oklch(0.94 0.012 175);
+  --border: oklch(0.88 0.015 178);
+  --input: oklch(0.92 0.012 175);
+  --skeleton: oklch(0.92 0.015 178);
+  --sidebar: oklch(0.96 0.01 176);
+  --sidebar-accent: oklch(0.92 0.022 180);
+}
+
+.dark.theme-teal,
+.theme-teal.dark {
+  --primary: oklch(0.55 0.14 175);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.14 175);
+  
+  --accent: oklch(0.60 0.11 165);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.70 0.14 175);
+  --chart-2: oklch(0.75 0.11 165);
+  
+  --sidebar-primary: oklch(0.55 0.14 175);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.14 175);
+  
+  /* Dark teal-tinted backgrounds */
+  --background: oklch(0.18 0.02 178);
+  --card: oklch(0.22 0.025 180);
+  --popover: oklch(0.22 0.025 180);
+  --secondary: oklch(0.28 0.025 178);
+  --muted: oklch(0.28 0.02 175);
+  --border: oklch(0.35 0.018 178);
+  --input: oklch(0.30 0.018 176);
+  --skeleton: oklch(0.28 0.02 178);
+  --sidebar: oklch(0.20 0.022 179);
+  --sidebar-accent: oklch(0.28 0.025 180);
+}
+
+/* ===========================================
+   RASPBERRY THEME (Raspberry #cc2649)
+   Hue ~355-5 (pink-red) - different from destructive (25)
+   =========================================== */
+:root.theme-raspberry {
+  /* Primary raspberry - frambuesa vibrante */
+  --primary: oklch(0.52 0.20 5);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.52 0.20 5);
+  
+  /* Accent - lighter raspberry */
+  --accent: oklch(0.60 0.17 358);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.52 0.20 5);
+  --chart-2: oklch(0.60 0.17 358);
+  
+  --sidebar-primary: oklch(0.52 0.20 5);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.52 0.20 5);
+  
+  /* Raspberry-tinted backgrounds (subtle warm pink) */
+  --background: oklch(0.98 0.008 5);
+  --card: oklch(0.995 0.006 8);
+  --popover: oklch(0.995 0.004 5);
+  --secondary: oklch(0.95 0.02 8);
+  --muted: oklch(0.94 0.012 5);
+  --border: oklch(0.88 0.015 8);
+  --input: oklch(0.92 0.012 5);
+  --skeleton: oklch(0.92 0.015 8);
+  --sidebar: oklch(0.96 0.01 6);
+  --sidebar-accent: oklch(0.92 0.022 10);
+}
+
+.dark.theme-raspberry,
+.theme-raspberry.dark {
+  --primary: oklch(0.55 0.18 5);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.18 5);
+  
+  --accent: oklch(0.60 0.15 358);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.60 0.18 5);
+  --chart-2: oklch(0.68 0.15 358);
+  
+  --sidebar-primary: oklch(0.55 0.18 5);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.18 5);
+  
+  /* Dark raspberry-tinted backgrounds */
+  --background: oklch(0.18 0.02 8);
+  --card: oklch(0.22 0.025 10);
+  --popover: oklch(0.22 0.025 10);
+  --secondary: oklch(0.28 0.025 8);
+  --muted: oklch(0.28 0.02 5);
+  --border: oklch(0.35 0.018 8);
+  --input: oklch(0.30 0.018 6);
+  --skeleton: oklch(0.28 0.02 8);
+  --sidebar: oklch(0.20 0.022 7);
+  --sidebar-accent: oklch(0.28 0.025 10);
+}
+
+/* ============================================
+   PURPLE THEME
+   ============================================ */
+:root.theme-purple {
+  --primary: oklch(0.55 0.22 285);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.22 285);
+  
+  --accent: oklch(0.65 0.18 295);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.55 0.22 285);
+  --chart-2: oklch(0.65 0.18 295);
+  
+  --sidebar-primary: oklch(0.55 0.22 285);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.22 285);
+  
+  /* Purple-tinted backgrounds */
+  --background: oklch(0.98 0.008 290);
+  --card: oklch(0.995 0.006 295);
+  --popover: oklch(0.995 0.004 290);
+  --secondary: oklch(0.95 0.02 293);
+  --muted: oklch(0.94 0.012 290);
+  --border: oklch(0.88 0.015 293);
+  --input: oklch(0.92 0.012 290);
+  --skeleton: oklch(0.92 0.015 293);
+  --sidebar: oklch(0.96 0.01 291);
+  --sidebar-accent: oklch(0.92 0.025 295);
+}
+
+.dark.theme-purple,
+.theme-purple.dark {
+  --primary: oklch(0.55 0.20 285);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.20 285);
+  
+  --accent: oklch(0.60 0.16 295);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.68 0.20 285);
+  --chart-2: oklch(0.75 0.16 295);
+  
+  --sidebar-primary: oklch(0.55 0.20 285);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.20 285);
+  
+  /* Dark purple-tinted backgrounds */
+  --background: oklch(0.18 0.02 288);
+  --card: oklch(0.22 0.025 292);
+  --popover: oklch(0.22 0.025 292);
+  --secondary: oklch(0.28 0.025 290);
+  --muted: oklch(0.28 0.02 285);
+  --border: oklch(0.35 0.018 290);
+  --input: oklch(0.30 0.018 288);
+  --skeleton: oklch(0.28 0.02 290);
+  --sidebar: oklch(0.20 0.022 289);
+  --sidebar-accent: oklch(0.28 0.025 292);
+}
+
+/* ============================================
+   PINK THEME
+   ============================================ */
+:root.theme-pink {
+  --primary: oklch(0.58 0.22 335);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.58 0.22 335);
+  
+  --accent: oklch(0.68 0.18 345);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.58 0.22 335);
+  --chart-2: oklch(0.68 0.18 345);
+  
+  --sidebar-primary: oklch(0.58 0.22 335);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.58 0.22 335);
+  
+  /* Pink-tinted backgrounds */
+  --background: oklch(0.98 0.008 340);
+  --card: oklch(0.995 0.006 345);
+  --popover: oklch(0.995 0.004 340);
+  --secondary: oklch(0.95 0.02 343);
+  --muted: oklch(0.94 0.012 340);
+  --border: oklch(0.88 0.015 343);
+  --input: oklch(0.92 0.012 340);
+  --skeleton: oklch(0.92 0.015 343);
+  --sidebar: oklch(0.96 0.01 341);
+  --sidebar-accent: oklch(0.92 0.025 345);
+}
+
+.dark.theme-pink,
+.theme-pink.dark {
+  --primary: oklch(0.55 0.20 335);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.20 335);
+  
+  --accent: oklch(0.62 0.16 345);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.70 0.20 335);
+  --chart-2: oklch(0.78 0.16 345);
+  
+  --sidebar-primary: oklch(0.55 0.20 335);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.20 335);
+  
+  /* Dark pink-tinted backgrounds */
+  --background: oklch(0.18 0.02 338);
+  --card: oklch(0.22 0.025 342);
+  --popover: oklch(0.22 0.025 342);
+  --secondary: oklch(0.28 0.025 340);
+  --muted: oklch(0.28 0.02 335);
+  --border: oklch(0.35 0.018 340);
+  --input: oklch(0.30 0.018 338);
+  --skeleton: oklch(0.28 0.02 340);
+  --sidebar: oklch(0.20 0.022 339);
+  --sidebar-accent: oklch(0.28 0.025 342);
+}
+
+/* ===========================================
+   MAGENTA THEME (Fuchsia/Magenta - different from the red of "Cancelled")
+   Hue 320-330 to avoid conflict with destructive red (25)
+   =========================================== */
+:root.theme-magenta {
+  /* Primary magenta - fucsia vibrante */
+  --primary: oklch(0.55 0.22 325);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.22 325);
+  
+  /* Accent - lighter magenta */
+  --accent: oklch(0.62 0.18 320);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.55 0.22 325);
+  --chart-2: oklch(0.62 0.18 320);
+  
+  --sidebar-primary: oklch(0.55 0.22 325);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.55 0.22 325);
+  
+  /* Magenta-tinted backgrounds */
+  --background: oklch(0.98 0.008 328);
+  --card: oklch(0.995 0.006 330);
+  --popover: oklch(0.995 0.004 328);
+  --secondary: oklch(0.95 0.02 330);
+  --muted: oklch(0.94 0.012 328);
+  --border: oklch(0.88 0.015 330);
+  --input: oklch(0.92 0.012 328);
+  --skeleton: oklch(0.92 0.015 330);
+  --sidebar: oklch(0.96 0.01 329);
+  --sidebar-accent: oklch(0.92 0.025 332);
+}
+
+.dark.theme-magenta,
+.theme-magenta.dark {
+  --primary: oklch(0.52 0.20 325);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.52 0.20 325);
+  
+  --accent: oklch(0.58 0.16 320);
+  --accent-foreground: oklch(1 0 0);
+  
+  --chart-1: oklch(0.62 0.20 325);
+  --chart-2: oklch(0.68 0.16 320);
+  
+  --sidebar-primary: oklch(0.52 0.20 325);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-ring: oklch(0.52 0.20 325);
+  
+  /* Dark magenta-tinted backgrounds */
+  --background: oklch(0.18 0.02 328);
+  --card: oklch(0.22 0.025 330);
+  --popover: oklch(0.22 0.025 330);
+  --secondary: oklch(0.28 0.025 328);
+  --muted: oklch(0.28 0.02 325);
+  --border: oklch(0.35 0.018 328);
+  --input: oklch(0.30 0.018 326);
+  --skeleton: oklch(0.28 0.02 328);
+  --sidebar: oklch(0.20 0.022 327);
+  --sidebar-accent: oklch(0.28 0.025 330);
+}
+
+/* ===========================================
+   COPPER THEME (Copper/Terracotta - different from the yellow of "Earrings")
+   Hue 35-50 (orange-copper) to avoid conflict with warning yellow (85)
+   =========================================== */
+:root.theme-copper {
+  /* Primary copper - warm terracotta */
+  --primary: oklch(0.55 0.16 40);
+  --primary-foreground: oklch(1 0 0); /* White text for contrast */
+  --ring: oklch(0.55 0.16 40);
+  
+  /* Accent - bronce */
+  --accent: oklch(0.60 0.14 35);
+  --accent-foreground: oklch(1 0 0); /* Texto blanco */
+  
+  --chart-1: oklch(0.55 0.16 40);
+  --chart-2: oklch(0.60 0.14 35);
+  
+  --sidebar-primary: oklch(0.55 0.16 40);
+  --sidebar-primary-foreground: oklch(1 0 0); /* Texto blanco */
+  --sidebar-ring: oklch(0.55 0.16 40);
+  
+  /* Copper-tinted backgrounds (warm copper) */
+  --background: oklch(0.98 0.01 45);
+  --card: oklch(0.995 0.008 48);
+  --popover: oklch(0.995 0.006 45);
+  --secondary: oklch(0.95 0.022 47);
+  --muted: oklch(0.94 0.015 45);
+  --border: oklch(0.88 0.016 47);
+  --input: oklch(0.92 0.014 45);
+  --skeleton: oklch(0.92 0.016 47);
+  --sidebar: oklch(0.96 0.012 46);
+  --sidebar-accent: oklch(0.92 0.025 50);
+}
+
+.dark.theme-copper,
+.theme-copper.dark {
+  /* Primary copper in dark mode */
+  --primary: oklch(0.56 0.14 40);
+  --primary-foreground: oklch(1 0 0); /* White text for contrast */
+  --ring: oklch(0.56 0.14 40);
+  
+  --accent: oklch(0.62 0.12 35);
+  --accent-foreground: oklch(1 0 0); /* Texto blanco */
+  
+  --chart-1: oklch(0.56 0.14 40);
+  --chart-2: oklch(0.62 0.12 35);
+  
+  --sidebar-primary: oklch(0.56 0.14 40);
+  --sidebar-primary-foreground: oklch(1 0 0); /* Texto blanco */
+  --sidebar-ring: oklch(0.56 0.14 40);
+  
+  /* Dark copper-tinted backgrounds */
+  --background: oklch(0.18 0.022 44);
+  --card: oklch(0.22 0.028 48);
+  --popover: oklch(0.22 0.028 48);
+  --secondary: oklch(0.28 0.028 46);
+  --muted: oklch(0.28 0.022 44);
+  --border: oklch(0.35 0.02 46);
+  --input: oklch(0.30 0.02 44);
+  --skeleton: oklch(0.28 0.022 46);
+  --sidebar: oklch(0.20 0.025 45);
+  --sidebar-accent: oklch(0.28 0.028 48);
+}
+
+/* ===========================================
+   THEME-AWARE BUTTON OVERRIDES
+   "New Request" button - adaptable to theme
+   =========================================== */
+
+/* NOTE: Theme-specific form input focus states removed.
+   --input-focus-border and --input-focus-shadow variables now use var(--primary)
+   and automatically adapt to the selected theme. */
+
+/* ===========================================
+   STATUS CARDS - THEME-AWARE GLOW STYLES
+   Glows that fit the selected theme
+   =========================================== */
+
+/* Primary card - uses the theme color */
+.status-card-glow-primary {
+  box-shadow: 0 0 12px -3px hsl(var(--primary) / 0.2);
+}
+
+.status-card-glow-primary-active {
+  box-shadow: 0 0 24px -4px hsl(var(--primary) / 0.45);
+}
+
+/* Warning card - use theme CSS variable */
+.status-card-glow-warning {
+  box-shadow: 0 0 12px -3px hsl(var(--warning) / 0.25);
+}
+
+.status-card-glow-warning-active {
+  box-shadow: 0 0 24px -4px hsl(var(--warning) / 0.5);
+}
+
+/* Success card - use theme CSS variable */
+.status-card-glow-success {
+  box-shadow: 0 0 12px -3px hsl(var(--success) / 0.25);
+}
+
+.status-card-glow-success-active {
+  box-shadow: 0 0 24px -4px hsl(var(--success) / 0.5);
+}
+
+/* Destructive card - uses theme CSS variable */
+.status-card-glow-destructive {
+  box-shadow: 0 0 12px -3px hsl(var(--destructive) / 0.25);
+}
+
+.status-card-glow-destructive-active {
+  box-shadow: 0 0 24px -4px hsl(var(--destructive) / 0.5);
+}
+
+/* ===========================================
+   RECHARTS - THEME-AWARE STYLES
+   Graphics that adapt to the selected topic
+   =========================================== */
+
+/* Tooltip cursor fill adapta al tema */
+.recharts-tooltip-cursor {
+  fill: var(--primary) !important;
+  opacity: 0.1 !important;
+}
+
+/* Bar fill - use the primary color of the theme */
+.recharts-bar-rectangle path,
+.recharts-bar path {
+  fill: var(--primary) !important;
+}
+
+/* Gradient for bars - fallback */
+.recharts-rectangle {
+  fill: var(--primary) !important;
+}
+
+/* Tooltip wrapper - ensure theme colors */
+.recharts-tooltip-wrapper {
+  z-index: 50 !important;
+}
+
+/* Cartesian grid lines */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border) !important;
+  opacity: 0.4 !important;
+}
+
+/* XAxis and YAxis tick text */
+.recharts-xAxis .recharts-cartesian-axis-tick-value,
+.recharts-yAxis .recharts-cartesian-axis-tick-value {
+  fill: var(--muted-foreground) !important;
+}
+
+/* ===========================================
+   THEME SETTINGS TRIGGER BUTTON
+   Hover and activate that fit the theme
+   =========================================== */
+
+/* Hover state - uses primary of the theme with very low opacity */
+.theme-settings-trigger:hover {
+  background-color: color-mix(in oklch, var(--primary) 8%, var(--background)) !important;
+  border-color: color-mix(in oklch, var(--primary) 35%, var(--border)) !important;
+}
+
+/* active/pressed state - a little more intense than hover */
+.theme-settings-trigger:active {
+  background-color: color-mix(in oklch, var(--primary) 14%, var(--background)) !important;
+  border-color: color-mix(in oklch, var(--primary) 45%, var(--border)) !important;
+}
+
+/* Estado focus - anillo sutil */
+.theme-settings-trigger:focus,
+.theme-settings-trigger:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 25%, transparent) !important;
+}
+
+/* Dark mode adjustments - slightly more intense for visibility */
+.dark .theme-settings-trigger:hover {
+  background-color: color-mix(in oklch, var(--primary) 12%, var(--background)) !important;
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border)) !important;
+}
+
+.dark .theme-settings-trigger:active {
+  background-color: color-mix(in oklch, var(--primary) 18%, var(--background)) !important;
+  border-color: color-mix(in oklch, var(--primary) 50%, var(--border)) !important;
+}
+
+/* ============================================
+   DROPDOWN MENU ANIMATIONS
+   Animaciones fluidas y elegantes al abrir
+   ============================================ */
+
+/* Keyframes for dropdown content */
+@keyframes dropdown-menu-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(-8px);
+    filter: blur(4px);
+  }
+  50% {
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes dropdown-menu-close {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+    filter: blur(2px);
+  }
+}
+
+/* Keyframes for menu items with stagger effect */
+@keyframes dropdown-item-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0px);
+  }
+}
+
+/* Apply animation to dropdown content */
+.dropdown-menu-content[data-state="open"] {
+  animation: dropdown-menu-open 280ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: top center;
+}
+
+.dropdown-menu-content[data-state="closed"] {
+  animation: dropdown-menu-close 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Staggered animation for each menu item */
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item {
+  opacity: 0;
+  animation: dropdown-item-appear 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Stagger delays for each item (up to 10 items) */
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(1) {
+  animation-delay: 40ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(2) {
+  animation-delay: 70ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(3) {
+  animation-delay: 100ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(4) {
+  animation-delay: 130ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(5) {
+  animation-delay: 160ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(6) {
+  animation-delay: 190ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(7) {
+  animation-delay: 220ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(8) {
+  animation-delay: 250ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(9) {
+  animation-delay: 280ms;
+}
+.dropdown-menu-content[data-state="open"] .dropdown-menu-item:nth-child(10) {
+  animation-delay: 310ms;
+}
+
+/* Improved hover effect for items with smooth transition */
+.dropdown-menu-item {
+  transition: background-color 150ms ease, transform 120ms ease;
+}
+
+.dropdown-menu-item:hover {
+  transform: translateX(2px);
+}
+
+/* Separator also with animation */
+.dropdown-menu-content[data-state="open"] [data-slot="dropdown-menu-separator"] {
+  opacity: 0;
+  animation: dropdown-item-appear 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+
+/* ===========================================
+   NEW ORDER POPUP - MOBILE RESPONSIVE
+   New order notification modal
+   Controlled width and tight typography
+   =========================================== */
+
+/* Base styles for new order popup */
+.new-order-popup {
+  /* Width managed via Tailwind in the component */
+}
+
+@media (max-width: 640px) {
+  /* Popup container - width already controlled by Tailwind w-[calc(100vw-32px)] */
+  
+  /* Header with gradient - more compact */
+  .new-order-popup-header,
+  .rounded-2xl > .bg-gradient-to-br {
+    padding: 16px 16px 20px 16px !important;
+  }
+  
+  /* Popup Title */
+  .new-order-popup h2,
+  .new-order-popup .text-xl {
+    font-size: 17px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Caption */
+  .new-order-popup .text-sm,
+  .new-order-popup .text-white\/80 {
+    font-size: 12px !important;
+  }
+  
+  /* Header icon */
+  .new-order-popup .p-3 {
+    padding: 10px !important;
+  }
+  
+  .new-order-popup .h-7.w-7 {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  
+  /* Contenido principal - padding reducido */
+  .new-order-popup .px-6.py-5 {
+    padding: 14px 14px !important;
+  }
+  
+  /* Employee avatar - smaller */
+  .new-order-popup .h-16.w-16 {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  
+  /* Smallest sparkles indicator */
+  .new-order-popup .p-1.bg-success {
+    padding: 2px !important;
+  }
+  
+  .new-order-popup .h-3\.5.w-3\.5 {
+    width: 10px !important;
+    height: 10px !important;
+  }
+  
+  /* Employee Name - 14px (secondary title) */
+  .new-order-popup .font-semibold.text-lg {
+    font-size: 14px !important;
+    line-height: 1.25 !important;
+  }
+  
+  /* Small texts and labels - 12px */
+  .new-order-popup .text-xs,
+  .new-order-popup .text-muted-foreground {
+    font-size: 12px !important;
+  }
+  
+  /* Status badge */
+  .new-order-popup [data-slot="badge"] {
+    font-size: 11px !important;
+    padding: 2px 8px !important;
+  }
+  
+  /* Section icons - smaller */
+  .new-order-popup .p-2\.5 {
+    padding: 8px !important;
+  }
+  
+  .new-order-popup .h-4.w-4 {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Data values ​​(date, time, place) - 12px */
+  .new-order-popup .font-medium.text-sm,
+  .new-order-popup p.font-medium {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+  
+  /* Data grid - reduced gap */
+  .new-order-popup .grid.gap-3 {
+    gap: 10px !important;
+  }
+  
+  /* Vertical content spacing */
+  .new-order-popup .space-y-5 {
+    gap: 14px !important;
+  }
+  
+  /* Footer with buttons - reduced padding */
+  .new-order-popup .px-6.py-4 {
+    padding: 12px 14px !important;
+  }
+  
+  /* Footer buttons */
+  .new-order-popup .elegant-outline-btn,
+  .new-order-popup .success-action-btn {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    min-width: 80px !important;
+  }
+  
+  /* Icons inside buttons */
+  .new-order-popup button svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Close button X in corner */
+  .new-order-popup .absolute.top-4.right-4 {
+    top: 10px !important;
+    right: 10px !important;
+    padding: 6px !important;
+  }
+  
+  .new-order-popup .absolute.top-4.right-4 svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Smaller decorative circles */
+  .new-order-popup .w-32.h-32 {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .new-order-popup .w-24.h-24 {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+/* ===========================================
+   ALL MODALS - TABLET RESPONSIVE
+   Tablet styles (641px - 1024px)
+   =========================================== */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Centered modals with controlled widths - TABLET */
+  .box-lunch-modal {
+    max-width: 576px !important; /* max-w-xl */
+    margin: 0 auto !important;
+  }
+  
+  .order-details-modal {
+    max-width: 448px !important; /* max-w-md */
+    margin: 0 auto !important;
+  }
+}
+
+/* ===========================================
+   ALL MODALS - DESKTOP
+   Desktop Styles (1025px+)
+   =========================================== */
+
+@media (min-width: 1025px) {
+  /* Modal Solicitar Box Lunch - max-w-2xl (672px) */
+  .box-lunch-modal:not(.order-details-modal) {
+    max-width: 672px !important; /* max-w-2xl */
+    margin: 0 auto !important;
+  }
+  
+  /* Order Detail Modal - max-w-lg (512px) */
+  .order-details-modal {
+    max-width: 512px !important; /* max-w-lg */
+    margin: 0 auto !important;
+  }
+}
+
+/* ===========================================
+   ORDER TABLE - OVERFLOW CONTROL
+   Avoid horizontal scroll bars
+   =========================================== */
+
+.tabla-pedidos-container {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.tabla-pedidos-container table {
+  table-layout: fixed !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Prevent motion.tr from causing horizontal reflow */
+.tabla-pedidos-container tr {
+  transform: none !important;
+}
+
+/* Prevent animations from causing horizontal reflow */
+.tabla-pedidos-container tr,
+.tabla-pedidos-container td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===========================================
+   ORDER TABLE - ROW HOVER EFFECTS
+   Subtle hover effect on rows
+   THEME-AWARE: Use var(--primary)
+   =========================================== */
+
+/* Table container with fixed layout to avoid overflow */
+.tabla-pedidos-fixed {
+  table-layout: fixed !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  border-collapse: collapse !important;
+}
+
+/* Table rows - smooth transition */
+.tabla-pedidos-fixed tbody tr {
+  transition: background-color 0.2s ease-out !important;
+}
+
+/* Full row hover - subtle tint of primary theme color */
+.tabla-pedidos-fixed tbody tr:hover {
+  background-color: color-mix(in oklch, var(--primary) 4%, transparent) !important;
+}
+
+/* Dark mode - Hover more visible */
+.dark .tabla-pedidos-fixed tbody tr:hover {
+  background-color: color-mix(in oklch, var(--primary) 8%, transparent) !important;
+}
+
+/* Row selected/highlighted status */
+.tabla-pedidos-fixed tbody tr.row-highlighted {
+  background-color: color-mix(in oklch, var(--primary) 8%, transparent) !important;
+}
+
+.dark .tabla-pedidos-fixed tbody tr.row-highlighted {
+  background-color: color-mix(in oklch, var(--primary) 12%, transparent) !important;
+}
+
+/* Prevent individual cells from having separate hover effects */
+.tabla-pedidos-fixed td {
+  background-color: transparent !important;
+  transition: none !important;
+}
+
+/* Compact table typeface for desktop/tablet */
+@media (min-width: 768px) {
+  .tabla-pedidos-fixed .typo-table-cell {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+}
+
+/* Tablet - slightly smaller font */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tabla-pedidos-fixed .typo-table-cell {
+    font-size: 12.5px;
+  }
+}
+
+/* ===========================================
+   FORM FIELD CONTROL ICONS - BORDER COLOR ON FOCUS/OPEN
+   Icons INSIDE form controls
+   (placeholder icons) change their border to the theme color
+   when the field is in focus/open
+   =========================================== */
+
+/* Icons within default form triggers */
+.form-input-trigger svg {
+  transition: color 150ms ease-out, stroke 150ms ease-out !important;
+}
+
+/* Icons inside triggers when focus/open - primary border color */
+/* Rules with high specificity to override inline classes like text-muted-foreground */
+.form-input-trigger:focus svg,
+.form-input-trigger:focus-visible svg,
+.form-input-trigger:focus-within svg,
+.form-input-trigger[data-state="open"] svg,
+.form-input-trigger:focus svg.text-muted-foreground,
+.form-input-trigger:focus-visible svg.text-muted-foreground,
+.form-input-trigger:focus-within svg.text-muted-foreground,
+.form-input-trigger[data-state="open"] svg.text-muted-foreground,
+.form-input-trigger:focus .text-muted-foreground svg,
+.form-input-trigger:focus-visible .text-muted-foreground svg,
+.form-input-trigger:focus-within .text-muted-foreground svg,
+.form-input-trigger[data-state="open"] .text-muted-foreground svg,
+.form-input-trigger:focus span svg,
+.form-input-trigger:focus-visible span svg,
+.form-input-trigger[data-state="open"] span svg {
+  color: var(--primary) !important;
+}
+
+/* Select trigger - icons (chevrons) and placeholders */
+[data-slot="select-trigger"]:focus svg,
+[data-slot="select-trigger"]:focus-visible svg,
+[data-slot="select-trigger"][data-state="open"] svg,
+[data-slot="select-trigger"]:focus svg.text-muted-foreground,
+[data-slot="select-trigger"][data-state="open"] svg.text-muted-foreground,
+[data-slot="select-trigger"]:focus span svg,
+[data-slot="select-trigger"][data-state="open"] span svg {
+  color: var(--primary) !important;
+}
+
+/* Popover trigger (like calendar) - icons */
+[data-slot="popover-trigger"]:focus svg,
+[data-slot="popover-trigger"]:focus-visible svg,
+[data-slot="popover-trigger"][data-state="open"] svg,
+button.form-input-trigger:focus svg,
+button.form-input-trigger:focus-visible svg,
+button.form-input-trigger[data-state="open"] svg,
+button.form-input-trigger:focus svg.text-muted-foreground,
+button.form-input-trigger[data-state="open"] svg.text-muted-foreground,
+button.form-input-trigger:focus span svg,
+button.form-input-trigger[data-state="open"] span svg {
+  color: var(--primary) !important;
+}
+
+/* Dark mode - same styles, primary color already fits */
+.dark .form-input-trigger:focus svg,
+.dark .form-input-trigger:focus-visible svg,
+.dark .form-input-trigger:focus-within svg,
+.dark .form-input-trigger[data-state="open"] svg,
+.dark .form-input-trigger:focus svg.text-muted-foreground,
+.dark .form-input-trigger[data-state="open"] svg.text-muted-foreground,
+.dark .form-input-trigger:focus span svg,
+.dark .form-input-trigger[data-state="open"] span svg,
+.dark [data-slot="select-trigger"]:focus svg,
+.dark [data-slot="select-trigger"][data-state="open"] svg,
+.dark [data-slot="select-trigger"]:focus span svg,
+.dark [data-slot="select-trigger"][data-state="open"] span svg,
+.dark button.form-input-trigger:focus svg,
+.dark button.form-input-trigger[data-state="open"] svg,
+.dark button.form-input-trigger:focus span svg,
+.dark button.form-input-trigger[data-state="open"] span svg {
+  color: var(--primary) !important;
+}
+
+/* ===========================================
+   ADMIN ORDER CONFIRMATION MODAL - THEME-AWARE
+   Confirmation modal colors adapted
+   to the selected theme (use --primary)
+   =========================================== */
+
+/* Gradient header of the parent theme */
+.admin-confirmation-header {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 80%, var(--accent)) 50%,
+    var(--accent) 100%
+  ) !important;
+}
+
+/* Confirm button with theme color */
+.admin-confirmation-btn {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  transition: background-color 0.2s ease-out, transform 0.15s ease-out !important;
+}
+
+.admin-confirmation-btn:hover {
+  background-color: color-mix(in oklch, var(--primary) 85%, black) !important;
+  transform: translateY(-1px);
+}
+
+.admin-confirmation-btn:active {
+  transform: translateY(0);
+}
+
+/* Dark mode - settings for better contrast */
+.dark .admin-confirmation-header {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 75%, var(--accent)) 50%,
+    var(--accent) 100%
+  ) !important;
+}
+
+.dark .admin-confirmation-btn:hover {
+  background-color: color-mix(in oklch, var(--primary) 90%, white) !important;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  MODO MANTENIMIENTO — web.config                         ║
+  ║                                                          ║
+  ║  CÓMO ACTIVAR:                                           ║
+  ║    Reemplaza el web.config normal en el servidor         ║
+  ║    con este archivo.                                     ║
+  ║                                                          ║
+  ║  CÓMO DESACTIVAR:                                        ║
+  ║    Restaura el web.config normal (web.config.normal).    ║
+  ╚══════════════════════════════════════════════════════════╝
+-->
+<configuration>
+  <system.webServer>
+
+    <rewrite>
+      <rules>
+
+        <!-- ══════════════════════════════════════════
+             REGLA 1: Dejar pasar los assets estáticos
+             (imágenes, CSS, JS, fuentes)
+             para que la página de mantenimiento
+             cargue correctamente.
+             ══════════════════════════════════════════ -->
+        <rule name="Allow Static Assets" stopProcessing="true">
+          <match url=".*" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" />
+          </conditions>
+          <action type="None" />
+        </rule>
+
+        <!-- ══════════════════════════════════════════
+             REGLA 2: Redirigir TODO lo demás
+             a la pantalla de mantenimiento.
+             ══════════════════════════════════════════ -->
+        <rule name="Maintenance Mode" stopProcessing="true">
+          <match url=".*" />
+          <conditions logicalGrouping="MatchAll">
+            <!-- Excluir la propia página para no crear un bucle -->
+            <add input="{REQUEST_URI}" pattern="maintenance\.html$" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/boxlunch/maintenance.html" />
+        </rule>
+
+      </rules>
+    </rewrite>
+
+    <!-- Mostrar nuestra página en vez del error 503 de IIS -->
+    <httpErrors existingResponse="PassThrough" />
+
+  </system.webServer>
+</configuration>
